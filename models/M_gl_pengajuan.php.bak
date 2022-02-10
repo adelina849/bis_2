@@ -394,7 +394,7 @@
 		
 		function get_no_pengajuan($kode_kantor)
         {
-			$query = "SELECT MAX(no_reg + '0.00') + 1 AS NO_REG_FORMAT FROM tb_pengajuan WHERE kode_kantor = '".$kode_kantor."' AND YEAR(tgl_ins) = YEAR(NOW()) ;";
+			$query = "SELECT MAX(no_reg + '0.00') + 1 AS NO_REG_FORMAT FROM tb_pengajuan WHERE kode_kantor = '".$kode_kantor."';";
 			
             //$query = $this->db->get_where('tb_pengajuan', array($berdasarkan => $cari,'kode_kantor' => $this->session->userdata('ses_kode_kantor')));
 			
