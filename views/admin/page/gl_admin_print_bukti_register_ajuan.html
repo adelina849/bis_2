@@ -1,0 +1,269 @@
+<html>
+	<head>
+		<?php
+			echo '<title>'.$this->session->userdata('ses_gnl_nama_aplikasi').'</title>';
+		?>
+		
+		<!-- @page { size: auto;  margin: 0mm; } -->
+		<style>
+			@page { size: auto; margin-top:0mm;margin-bottom:0mm; }	
+		</style>
+	</head>
+	<body onload="window.print();">
+	<!-- <body> -->
+		<center style="margin:0;">
+			<!-- <img class="profile-user-img img-responsive" style="border:0px;width:50%;" src= "<?php echo base_url().'/'.$this->session->userdata('ses_gnl_logo_aplikasi_besar');?>" alt="User profile picture"> -->
+			<!-- <br/> -->
+			<?php //echo $this->session->userdata('ses_alamat_kantor') .'<br/>';?>
+			<?php //echo $this->session->userdata('ses_alamat_kantor') .'<br/><font style="font-size:60px;font-weight:bold;">'.$data_h_penjualan->no_antrian.'</font>';?>
+			<?php //echo '<h1 style="font-size:60px;">'.$data_h_penjualan->no_antrian.'</h1>';?>
+			<?php //echo $this->session->userdata('ses_alamat_kantor');?>
+		</center>
+			
+		
+			<br/>
+			<br/>
+			<br/>
+			<div class="box-body table-responsive no-padding" style="">
+				<table width="100%" id="table_transaksi" class="table table-hover" style="border-collapse: collapse;border:1px black solid;">
+					<!-- <thead> -->
+						<tr>
+							<td colspan="5" style="font-size:18px;text-align:center;font-weight:bold;border:1px black solid;padding:1%;">TANDA TERIMA</td>
+						</tr>
+						
+						<tr>
+							<td colspan="5"><br/></td>
+						</tr>
+						
+						<tr style="font-size:12px;">
+							<td>No. Registrasi</td><td> : <?php echo $get_data_pengajuan->no_reg;?></td>
+							<td></td>
+							<td>No. Surat</td><td> : <?php echo $get_data_pengajuan->no_surat;?></td>
+						</tr>
+						<tr style="font-size:12px;">
+							<td>Tgl Terima</td><td> : <?php echo tanggal($get_data_pengajuan->tgl_terima);?></td>
+							<td></td>
+							<td>Tgl Surat</td><td> : <?php echo tanggal($get_data_pengajuan->tgl_surat);?></td>
+						</tr>
+						
+						<tr>
+							<td colspan="5"><br/></td>
+						</tr>
+						
+						<tr style="font-size:12px;">
+							<td colspan="5">
+								<table style="border-collapse: collapse;border:1px black solid;width:100%;">
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>No. Kode</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->no_kode;?></td>
+									</tr>
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Nama Pemohon</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->NAMA_PENGAJU;?></td>
+									</tr>
+									
+									<?php
+										if($get_data_pengajuan->isLembaga == "YA")
+										{
+									?>
+											<tr style="font-size:12px;">
+												<td style="width:30%;"><b>Nama Lembaga</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->NAMA_MUSTAHIK;?></td>
+											</tr>
+									<?php
+										}
+										else
+										{
+									?>
+											<tr style="font-size:12px;">
+												<td style="width:30%;"><b>NIK Pemohon</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->NIK_PENGAJU;?></td>
+											</tr>
+											<tr style="font-size:12px;">
+												<td style="width:30%;"><b>Nama Mustahik</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->NAMA_MUSTAHIK;?></td>
+											</tr>
+									<?php
+										}
+									?>
+									
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Alamat</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->ALAMAT_PENGAJU;?></td>
+									</tr>
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Telpon</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->HP_PENGAJU;?></td>
+									</tr>
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Jenis Pengajuan</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->jenis_pengajuan;?></td>
+									</tr>
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Perihal</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->perihal;?></td>
+									</tr>
+									
+									
+								</table>
+							</td>
+						</tr>
+						
+						
+						
+						<!-- <tr> -->
+							<!-- <td colspan="1" rowspan="3"> -->
+							<!-- <!-- <img class="profile-user-img img-responsive" style="border:0px;width:55%;" src= "<?php echo base_url().'/'.$this->session->userdata('ses_gnl_logo_aplikasi_besar');?>" alt="User profile picture"> --> 
+							<!-- </td> -->
+							<!-- <td colspan="1" rowspan="3"><?php echo "Telpon : ".$this->session->userdata('ses_tlp_kantor');?></td> -->
+						<!-- </tr> -->
+						
+						
+						<tr style="font-size:12px;">
+							<td rowspan="3" colspan="1"><img style="border:0px;width:100px;" src= "<?php echo base_url().'/'.$this->session->userdata('ses_gnl_logo_aplikasi_besar');?>" alt="User profile picture"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td style="text-align:center;">Penerima</td>
+						</tr>
+						<tr style="font-size:12px;">
+							<!-- <td></td> -->
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr style="font-size:12px;">
+							<!-- <td></td> -->
+							<td colspan="3"><?php echo "Telpon : ".$this->session->userdata('ses_tlp_kantor');?></td>
+							<!-- <td></td> -->
+							<!-- <td style="text-align:center;"><?php echo $this->session->userdata('ses_nama_karyawan');?></td> -->
+							<td style="text-align:center;">Putri M</td>
+						</tr>
+						
+					<!-- </thead> -->
+					
+					
+					<tr>
+							<td colspan="5" style="text-align:center;font-weight:bold;border:1px black solid;padding:1%;">
+							_______________________________________</br></br>
+							</td>
+					</tr>
+						
+					
+						<tr>
+							<td colspan="5" style="font-size:18px;text-align:center;font-weight:bold;border:1px black solid;padding:1%;">TANDA TERIMA</td>
+						</tr>
+						
+						<tr>
+							<td colspan="5"><br/></td>
+						</tr>
+						
+						<tr style="font-size:12px;">
+							<td>No. Registrasi</td><td> : <?php echo $get_data_pengajuan->no_reg;?></td>
+							<td></td>
+							<td>No. Surat</td><td> : <?php echo $get_data_pengajuan->no_surat;?></td>
+						</tr>
+						<tr style="font-size:12px;">
+							<td>Tgl Terima</td><td> : <?php echo tanggal($get_data_pengajuan->tgl_terima);?></td>
+							<td></td>
+							<td>Tgl Surat</td><td> : <?php echo tanggal($get_data_pengajuan->tgl_surat);?></td>
+						</tr>
+						
+						<tr>
+							<td colspan="5"><br/></td>
+						</tr>
+						
+						<tr style="font-size:12px;">
+							<td colspan="5">
+								<table style="border-collapse: collapse;border:1px black solid;width:100%;">
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>No. Kode</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->no_kode;?></td>
+									</tr>
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Nama Pemohon</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->NAMA_PENGAJU;?></td>
+									</tr>
+									
+									<?php
+										if($get_data_pengajuan->isLembaga == "YA")
+										{
+									?>
+											<tr style="font-size:12px;">
+												<td style="width:30%;"><b>Nama Lembaga</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->NAMA_MUSTAHIK;?></td>
+											</tr>
+									<?php
+										}
+										else
+										{
+									?>
+											<tr style="font-size:12px;">
+												<td style="width:30%;"><b>NIK Pemohon</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->NIK_PENGAJU;?></td>
+											</tr>
+											<tr style="font-size:12px;">
+												<td style="width:30%;"><b>Nama Mustahik</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->NAMA_MUSTAHIK;?></td>
+											</tr>
+									<?php
+										}
+									?>
+									
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Alamat</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->ALAMAT_PENGAJU;?></td>
+									</tr>
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Telpon</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->HP_PENGAJU;?></td>
+									</tr>
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Jenis Pengajuan</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->jenis_pengajuan;?></td>
+									</tr>
+									<tr style="font-size:12px;">
+										<td style="width:30%;"><b>Perihal</b></td> <td style="width:70%;"> : <?php echo $get_data_pengajuan->perihal;?></td>
+									</tr>
+									
+									
+								</table>
+							</td>
+						</tr>
+						
+						
+						
+						<!-- <tr> -->
+							<!-- <td colspan="1" rowspan="3"> -->
+							<!-- <!-- <img class="profile-user-img img-responsive" style="border:0px;width:55%;" src= "<?php echo base_url().'/'.$this->session->userdata('ses_gnl_logo_aplikasi_besar');?>" alt="User profile picture"> --> 
+							<!-- </td> -->
+							<!-- <td colspan="1" rowspan="3"><?php echo "Telpon : ".$this->session->userdata('ses_tlp_kantor');?></td> -->
+						<!-- </tr> -->
+						
+						
+						<tr style="font-size:12px;">
+							<td rowspan="3" colspan="1"><img style="border:0px;width:100px;" src= "<?php echo base_url().'/'.$this->session->userdata('ses_gnl_logo_aplikasi_besar');?>" alt="User profile picture"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td style="text-align:center;">Penerima</td>
+						</tr>
+						<tr style="font-size:12px;">
+							<!-- <td></td> -->
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr style="font-size:12px;">
+							<!-- <td></td> -->
+							<td colspan="3"><?php echo "Telpon : ".$this->session->userdata('ses_tlp_kantor');?></td>
+							<!-- <td></td> -->
+							<!-- <td style="text-align:center;"><?php echo $this->session->userdata('ses_nama_karyawan');?></td> -->
+							<td style="text-align:center;">Putri M</td>
+						</tr>
+			
+				</table>
+			</div>
+			
+		
+		
+		
+		<center>
+			<?php
+				//echo '<br/>'.$data_h_penjualan->type_h_penjualan;
+			?>
+			<!-- <table style="width:100%; text-align:center;"> -->
+				<!-- <tr><td> -->
+					<!-- <font style="text-align:right;">TERIMA KASIH TELAH BERKUNJUNG, KAMI TUNGGU KEDATANGAN ANDA SELANJUTNYA</font> -->
+				<!-- </td></tr> -->
+			<!-- </table> -->
+			
+			
+		</center>
+	</body>
+</html>

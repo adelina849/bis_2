@@ -1,0 +1,301 @@
+ <!-- <title>LaporanPemasukanPeriode<?php echo $_GET['tahun'];?><?php echo $_GET['bulan'];?></title> -->
+ <title>Laporan Pengajuan</title>
+ 
+ <?php
+ 
+ $title = "LaporanPengajuan";
+ header("Content-type: application/vnd-ms-excel");
+ header("Content-Disposition: attachment; filename=$title.xls");
+ header("Pragma: no-cache");
+ header("Expires: 0");
+ 
+ ?>
+
+<?php
+	
+	if((!empty($_GET['dari'])) && ($_GET['dari']!= "")  )
+	{
+		$dari = $_GET['dari'];
+		$sampai = $_GET['sampai'];
+	}
+	else
+	{
+		$dari = date("Y-m-d");
+		$sampai = date("Y-m-d");
+	}
+
+	echo'
+	<center>
+		<h4>
+		Laporan Pelayanan Pengajuan Proposal
+		<br/>
+		Periode '.tanggal($dari).' - '.tanggal($sampai).'
+		<br/>
+		'.$this->session->userdata('ses_nama_kantor').'
+		</h4>
+	</center>';
+?>
+
+<?php
+	//TABLE
+	echo'<h5 style="color:green;"><b>AKUMULASI BERDASARKAN JENIS PENGAJUAN</b></h5>';
+	if(!empty($list_by_jenis_bantuan))
+		{
+			//echo gethostname();
+			//echo $this->M_gl_pengaturan->getUserIpAddr();
+			//$sts_query = strpos(base_url(),"localhost");
+			//echo $sts_query;
+			//$nama = "Mulyana Yusuf";
+			//echo str_replace("f","849",$nama);
+			echo'<table width="50%" id="example2" class="" style="border-collapse: collapse;border:1px black solid;">';
+				echo '<thead>
+<tr>';
+							echo '<th width="5%" style="border-collapse: collapse;border:1px black solid;">NO</th>';
+							echo '<th width="30%" style="border-collapse: collapse;border:1px black solid;">JENIS PENGAJUAN</th>';
+							echo '<th width="20%" style="border-collapse: collapse;border:1px black solid;">JUMLAH AJUAN</th>';
+				echo '</tr>
+</thead>';
+				$list_result = $list_by_jenis_bantuan->result();
+				$no =1;
+				$sub_total = 0;
+				echo '<tbody>';
+				foreach($list_result as $row)
+				{
+					echo'<tr>';
+						echo'<td style="border-collapse: collapse;border:1px black solid;">'.$no.'</td>';
+						echo'<td style="border-collapse: collapse;border:1px black solid;">'.$row->jenis_pengajuan.'</td>';
+						echo'<td style="border-collapse: collapse;border:1px black solid;">'.$row->CNT.'</td>';
+					echo'</tr>';
+					
+					$sub_total = $sub_total + $row->CNT;
+					$no++;
+				}
+				echo'<tr>';
+					echo'<td style="border-collapse: collapse;border:1px black solid;"></td>';
+					echo'<td style="border-collapse: collapse;border:1px black solid;"><b>TOTAL</b></td>';
+					echo'<td style="border-collapse: collapse;border:1px black solid;"><b>'.$sub_total.'</b></td>';
+				echo'</tr>';
+				echo '</tbody>';
+			echo'</table>';
+		}
+		else
+		{
+			echo'<center>';
+			echo'Tidak Ada Data Yang Ditampilkan !';
+			echo'</center>';
+		}
+	//TABLE
+?>
+
+</br>
+</br>
+
+<?php
+	//TABLE
+	echo'<h5 style="color:green;"><b>AKUMULASI BERDASARKAN ASHNAF</b></h5>';
+	if(!empty($list_by_ashnaf))
+		{
+			//echo gethostname();
+			//echo $this->M_gl_pengaturan->getUserIpAddr();
+			//$sts_query = strpos(base_url(),"localhost");
+			//echo $sts_query;
+			//$nama = "Mulyana Yusuf";
+			//echo str_replace("f","849",$nama);
+			echo'<table width="50%" id="example2" class="" style="border-collapse: collapse;border:1px black solid;">';
+				echo '<thead>
+<tr>';
+							echo '<th width="5%" style="border-collapse: collapse;border:1px black solid;">NO</th>';
+							echo '<th width="30%" style="border-collapse: collapse;border:1px black solid;">ASHNAF</th>';
+							echo '<th width="20%" style="border-collapse: collapse;border:1px black solid;">JUMLAH AJUAN</th>';
+				echo '</tr>
+</thead>';
+				$list_result = $list_by_ashnaf->result();
+				$no =1;
+				$sub_total = 0;
+				echo '<tbody>';
+				foreach($list_result as $row)
+				{
+					echo'<tr>';
+						echo'<td style="border-collapse: collapse;border:1px black solid;">'.$no.'</td>';
+						echo'<td style="border-collapse: collapse;border:1px black solid;">'.$row->ashnaf.'</td>';
+						echo'<td style="border-collapse: collapse;border:1px black solid;">'.$row->CNT.'</td>';
+					echo'</tr>';
+					
+					$sub_total = $sub_total + $row->CNT;
+					$no++;
+				}
+				echo'<tr>';
+					echo'<td style="border-collapse: collapse;border:1px black solid;"></td>';
+					echo'<td style="border-collapse: collapse;border:1px black solid;"><b>TOTAL</b></td>';
+					echo'<td style="border-collapse: collapse;border:1px black solid;"><b>'.$sub_total.'</b></td>';
+				echo'</tr>';
+				echo '</tbody>';
+			echo'</table>';
+		}
+		else
+		{
+			echo'<center>';
+			echo'Tidak Ada Data Yang Ditampilkan !';
+			echo'</center>';
+		}
+	//TABLE
+?>
+
+</br>
+</br>
+
+<?php
+	//TABLE
+	echo'<h5 style="color:green;"><b>AKUMULASI BERDASARKAN KODE PROGRAM</b></h5>';
+	if(!empty($list_by_kode_program))
+		{
+			//echo gethostname();
+			//echo $this->M_gl_pengaturan->getUserIpAddr();
+			//$sts_query = strpos(base_url(),"localhost");
+			//echo $sts_query;
+			//$nama = "Mulyana Yusuf";
+			//echo str_replace("f","849",$nama);
+			echo'<table width="50%" id="example2" class="" style="border-collapse: collapse;border:1px black solid;">';
+				echo '<thead>
+<tr>';
+							echo '<th width="5%" style="border-collapse: collapse;border:1px black solid;">NO</th>';
+							echo '<th width="30%" style="border-collapse: collapse;border:1px black solid;">KODE</th>';
+							echo '<th width="20%" style="border-collapse: collapse;border:1px black solid;">JUMLAH AJUAN</th>';
+				echo '</tr>
+</thead>';
+				$list_result = $list_by_kode_program->result();
+				$no =1;
+				$sub_total = 0;
+				echo '<tbody>';
+				foreach($list_result as $row)
+				{
+					echo'<tr>';
+						echo'<td style="border-collapse: collapse;border:1px black solid;">'.$no.'</td>';
+						echo'<td style="border-collapse: collapse;border:1px black solid;">'.$row->kode_program.'</td>';
+						echo'<td style="border-collapse: collapse;border:1px black solid;">'.$row->CNT.'</td>';
+					echo'</tr>';
+					
+					$sub_total = $sub_total + $row->CNT;
+					$no++;
+				}
+				echo'<tr>';
+					echo'<td style="border-collapse: collapse;border:1px black solid;"></td>';
+					echo'<td style="border-collapse: collapse;border:1px black solid;"><b>TOTAL</b></td>';
+					echo'<td style="border-collapse: collapse;border:1px black solid;"><b>'.$sub_total.'</b></td>';
+				echo'</tr>';
+				echo '</tbody>';
+			echo'</table>';
+		}
+		else
+		{
+			echo'<center>';
+			echo'Tidak Ada Data Yang Ditampilkan !';
+			echo'</center>';
+		}
+	//TABLE
+?>
+
+</br>
+</br>
+
+<?php
+	//TABLE
+	echo'<h5 style="color:green;"><b>DETAIL PENGAJUAN PROPOSAL</b></h5>';
+	if(!empty($list_pengajuan))
+		{
+			//echo gethostname();
+			//echo $this->M_gl_pengaturan->getUserIpAddr();
+			//$sts_query = strpos(base_url(),"localhost");
+			//echo $sts_query;
+			//$nama = "Mulyana Yusuf";
+			//echo str_replace("f","849",$nama);
+			echo'<table width="100%" id="example2" class="table table-hover">';
+				echo '<thead>
+<tr>';
+							echo '<th width="5%">NO</th>';
+							//echo '<th width="5%">FOTO</th>';
+							echo '<th width="20%">REGISTRASI</th>';
+							echo '<th width="25%">PEMOHON</th>';
+							echo '<th width="20%">MUSTAHIK</th>';
+							echo '<th width="30%">STATUS</th>';
+				echo '</tr>
+</thead>';
+				$list_result = $list_pengajuan->result();
+				$no =$this->uri->segment(2,0)+1;
+				echo '<tbody>';
+				foreach($list_result as $row)
+				{
+					echo'<tr>';
+						echo'<td>'.$no.'</td>';
+						
+						/*
+						if($row->img_file == "")
+						{
+							$src = base_url().'assets/global/no-image.jpg';
+							echo '<td>
+									<a href="'.$src.'" target="_blank" >
+										<img id="IMG_'.$no.'"  width="100px" height="100px" style="border:1px solid #C8C8C8; padding:5px; float:left; margin-right:20px;" src="'.$src.'" />
+									</a>
+									</td>';
+						}
+						else
+						{
+							//$src = base_url().'assets/global/karyawan/'.$row->avatar;
+							$src = base_url().''.$row->img_url.''.$row->img_file;
+							echo '<td>
+									<a href="'.$src.'" target="_blank" >
+										<img id="IMG_'.$no.'"  width="100px" height="100px" style="border:1px solid #C8C8C8; padding:5px; float:left; margin-right:20px;" src="'.$src.'" />
+									</a>
+								</td>';
+						}
+						*/
+						
+						echo '<td>
+								<b>No Reg :</b>'.$row->no_reg.'
+								</br><b>No Kode :</b>'.$row->no_kode.'
+								</br><b>No Surat :</b>'.$row->no_surat.'
+								</br><b>Bantuan :</b>'.$row->jenis_pengajuan.'
+								</br><b>Tgl Masuk :</b>'.$row->tgl_terima.'
+								</br><b>Lembaga/Orang :</b>'.$row->isLembaga.'
+							</td>';
+						echo '<td>
+								<b>NIK :</b>'.$row->NIK_PENGAJU.'
+								</br><b>Nama :</b>'.$row->NAMA_PENGAJU.'
+								</br><b>Handphone :</b>'.$row->HP_PENGAJU.'
+								</br><b>Alamat :</b>'.$row->ALAMAT_PENGAJU.'
+							</td>';
+							
+						echo '<td>
+								<b>NIK :</b>'.$row->NIK_MUSTAHIK.'
+								</br><b>Nama :</b>'.$row->NAMA_MUSTAHIK.'
+								</br><b>Handphone :</b>'.$row->HP_MUSTAHIK.'
+								</br><b>Alamat :</b>'.$row->ALAMAT_MUSTAHIK.'
+							</td>';
+						echo '<td>
+								<b>Nominal :</b>'.$row->nominal.'
+								</br><b>Catatan :</b>'.$row->catatan_acc.'
+								</br><b>Tgl Penyerahan :</b>'.$row->tgl_penyerahan.'
+							</td>';	
+						
+						//echo'<input type="hidden" id="id_satuan_'.$no.'" name="id_satuan_'.$no.'" value="'.$row->id_pengajuan.'" />';
+						
+						echo'<input type="hidden" id="id_pengajuan_'.$no.'" name="id_pengajuan_'.$no.'" value="'.$row->id_pengajuan.'" />';
+						
+						
+					echo'</tr>';
+					
+					echo'<tr><td style="border-bottom:0px black solid;"></td><td colspan="5"  style="border-bottom:1px black solid;"><b>Perihal : </b>'.$row->perihal.'</td></tr>';
+					$no++;
+				}
+				
+				echo '</tbody>';
+			echo'</table>';
+		}
+		else
+		{
+			echo'<center>';
+			echo'Tidak Ada Data Yang Ditampilkan !';
+			echo'</center>';
+		}
+	//TABLE
+?>

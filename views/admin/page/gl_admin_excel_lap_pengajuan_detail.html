@@ -1,0 +1,115 @@
+ <!-- <title>LaporanPemasukanPeriode<?php echo $_GET['tahun'];?><?php echo $_GET['bulan'];?></title> -->
+ <title>Laporan Pengajuan</title>
+ 
+ <?php
+ 
+ $title = "LaporanPengajuanDetail";
+ header("Content-type: application/vnd-ms-excel");
+ header("Content-Disposition: attachment; filename=$title.xls");
+ header("Pragma: no-cache");
+ header("Expires: 0");
+ 
+ ?>
+
+<?php
+	
+	if((!empty($_GET['dari'])) && ($_GET['dari']!= "")  )
+	{
+		$dari = $_GET['dari'];
+		$sampai = $_GET['sampai'];
+	}
+	else
+	{
+		$dari = date("Y-m-d");
+		$sampai = date("Y-m-d");
+	}
+
+	echo'
+	<center>
+		<h4>
+		Laporan Pelayanan Pengajuan Proposal
+		<br/>
+		Periode '.tanggal($dari).' - '.tanggal($sampai).'
+		<br/>
+		'.$this->session->userdata('ses_nama_kantor').'
+		</h4>
+	</center>';
+?>
+
+
+<?php
+	//TABLE
+	echo'<h5 style="color:green;"><b>DETAIL PENGAJUAN PROPOSAL</b></h5>';
+	if(!empty($list_pengajuan))
+	{
+		//echo gethostname();
+		//echo $this->M_gl_pengaturan->getUserIpAddr();
+		//$sts_query = strpos(base_url(),"localhost");
+		//echo $sts_query;
+		//$nama = "Mulyana Yusuf";
+		//echo str_replace("f","849",$nama);
+		echo'<table width="100%" id="example2" class="table table-hover">';
+			echo '<thead>
+			<tr>';
+						echo '<th width="5%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">NO</th>';
+						echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Tanggal</th>';
+						echo '<th width="20%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Uraian</th>';
+						echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Kecamatan</th>';
+						echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Alamat</th>';
+						echo '<th width="5%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Jenis Bantuan</th>';
+						echo '<th width="5%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Kode Program</th>';
+						echo '<th width="5%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Jenis Program</th>';
+						echo '<th width="5%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Ashnaf</th>';
+						echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Jumlah Bantuan</th>';
+						echo '<th width="15%" colspan="3" rowspan="1" style="border:1px solid black;text-align:center; font-weight:bold;">Penerima Manfaat</th>';
+			echo'</tr>';
+			echo'<tr>';
+				echo '<th width="5%" colspan="1" rowspan="1" style="border:1px solid black;text-align:center; font-weight:bold;">Perorangan</th>';
+				echo '<th width="5%" colspan="1" rowspan="1" style="border:1px solid black;text-align:center; font-weight:bold;">KK</th>';
+				echo '<th width="5%" colspan="1" rowspan="1" style="border:1px solid black;text-align:center; font-weight:bold;">Lembaga</th>';
+			echo'</tr>';
+			
+			echo'</thead>';
+			$list_result = $list_pengajuan->result();
+			$no =$this->uri->segment(2,0)+1;
+			echo '<tbody>';
+			foreach($list_result as $row)
+			{
+				echo'<tr>';
+					echo'<td style="border:1px solid black;">'.$no.'</td>';
+					echo'<td style="border:1px solid black;">'.$row->tgl_terima.'</td>';
+					echo'<td style="border:1px solid black;">'.$row->uraian.'</td>';
+					
+					echo'<td style="border:1px solid black;">'.$row->KEC_MUSTAHIK.'</td>';
+					echo'<td style="border:1px solid black;">'.$row->ALAMAT_MUSTAHIK.'</td>';
+					
+					echo'<td style="border:1px solid black;">'.$row->prog.'</td>';
+					echo'<td style="border:1px solid black;">'.$row->kode_program.'</td>';
+					echo'<td style="border:1px solid black;">'.$row->jenis_pengajuan.'</td>';
+					echo'<td style="border:1px solid black;">'.$row->ashnaf.'</td>';
+					echo'<td style="text-align:right;border:1px solid black;">'.number_format($row->nominal,0,'.',',').'</td>';
+					echo'<td style="text-align:right;border:1px solid black;">'.number_format($row->PENERIMA_PERORANGAN,0,'.',',').'</td>';
+					echo'<td style="text-align:right;border:1px solid black;">0</td>';
+					echo'<td style="text-align:right;border:1px solid black;">'.number_format($row->PENERIMA_LEMBAGA,0,'.',',').'</td>';
+					
+					
+					echo'<input type="hidden" id="id_pengajuan_'.$no.'" name="id_pengajuan_'.$no.'" value="'.$row->id_pengajuan.'" />';
+					
+					
+				echo'</tr>';
+				
+				//echo'<tr><td style="border-bottom:0px black solid;"></td><td colspan="5"  style="border-bottom:1px black solid;"><b>Perihal : </b>'.$row->perihal.'</td></tr>';
+				$no++;
+			}
+			
+			echo '</tbody>';
+		echo'</table>';
+	}
+	else
+	{
+		echo'<center>';
+		echo'Tidak Ada Data Yang Ditampilkan !';
+		echo'</center>';
+	}
+//TABLE
+?>

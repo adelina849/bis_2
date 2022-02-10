@@ -1,0 +1,572 @@
+<html>
+	<head>
+		<?php
+			echo '<title>'.$this->session->userdata('ses_gnl_nama_aplikasi').'</title>';
+		?>
+		
+		<!-- @page { size: auto;  margin: 0mm; } -->
+		<style>
+			@page { size: auto; margin-top:0mm;margin-bottom:0mm; }	
+		</style>
+		
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+			
+	</head>
+	<!-- <body onload="window.print();"> -->
+	<body>
+		<center style="margin:0;">
+			<!-- <img class="profile-user-img img-responsive" style="border:0px;width:50%;" src= "<?php echo base_url().'/'.$this->session->userdata('ses_gnl_logo_aplikasi_besar');?>" alt="User profile picture"> -->
+			<!-- <br/> -->
+			<?php //echo $this->session->userdata('ses_alamat_kantor') .'<br/>';?>
+			<?php //echo $this->session->userdata('ses_alamat_kantor') .'<br/><font style="font-size:60px;font-weight:bold;">'.$data_h_penjualan->no_antrian.'</font>';?>
+			<?php //echo '<h1 style="font-size:60px;">'.$data_h_penjualan->no_antrian.'</h1>';?>
+			<?php //echo $this->session->userdata('ses_alamat_kantor');?>
+		</center>
+			
+		
+			<input type="hidden" name="id_pengajuan" id="id_pengajuan" value="<?php echo ($get_data_pengajuan->id_pengajuan);?>"/>
+			
+			<input type="hidden" name="no_prog" id="no_prog" value="<?php echo ($get_data_pengajuan->no_prog);?>"/>
+			<div class="box-body table-responsive no-padding" style="">
+				<table width="100%" id="table_transaksi" class="table table-hover" style="border-collapse: collapse;border:0px black solid;">
+					<!-- <thead> -->
+						<tr style="border-bottom:1px black solid;">
+							<td rowspan="1" colspan="1"><img style="border:0px;width:150px;" src= "<?php echo base_url().'/'.$this->session->userdata('ses_gnl_logo_aplikasi_besar');?>" alt="User profile picture"></td>
+							
+							<td colspan="3" style="text-align:center;">
+								<b>BADAN AMIL ZAKAT NASIONAL</b>
+								</br>
+								<b>KABUPATEN SUKABUMI</b>
+								</br>
+								Komplek Islamic Center Cisaat Sukabumi 43152 Telp/Fax. (0266)215757
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4" style="text-align:center;">
+								<b>LEMBAR DISPOSISI</b>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<table width="100%" class="table table-hover" style="border-collapse: collapse;border:1px black solid;">
+									<tr>
+										<td><b>Surat Dari</b></td><td>: <?php echo $get_data_pengajuan->NAMA_PENGAJU;?></td>
+										<td></td>
+										<td><b>No. Register/Agenda</b></td><td>: <?php echo $get_data_pengajuan->no_reg;?></td>
+									</tr>
+									<tr>
+										<td><b>No.Surat</b></td><td>: <?php echo $get_data_pengajuan->no_surat;?></td>
+										<td></td>
+										<td><b>Tgl.Terima</b></td><td>: <?php echo tanggal($get_data_pengajuan->tgl_terima);?></td>
+									</tr>
+									<tr>
+										<td><b>Tgl Surat</b></td><td>: <?php echo tanggal($get_data_pengajuan->tgl_surat);?></td>
+										<td></td>
+										<td><b>Sifat</b></td>
+										<td>
+										:	
+										</td>
+									</tr>
+									<tr>
+										<td colspan="3"></td>
+										<td colspan="2">
+											<table width="100%" class="table table-hover" style="border-collapse: collapse;border:0px black solid;">
+												<tr>
+													<td>
+														<input type="checkbox" name="sangat_segera" value="SS"> Sangat Segera
+													</td>
+													<td>
+														<input type="checkbox" name="sangat_segera" value="SS"> Segera
+													</td>
+													<td>
+														<input type="checkbox" name="sangat_segera" value="SS"> Rahasia
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="4">
+								<table width="100%" class="table table-hover" style="border-collapse: collapse;border:1px black solid;">
+									<tr style="border:1px black solid;">
+										<?php 
+											if($get_data_pengajuan->isLembaga == 'YA')
+											{
+												echo'<td colspan="2" style="background-color:yellow; text-align:center;"><b>PERIHAL PENGAJUAN LEMBAGA</b></td>';
+											}
+											else
+											{
+												echo'<td colspan="2" style="background-color:green; text-align:center;"><b>PERIHAL PENGAJUAN PERORANGAN</b></td>';
+											}
+										?>
+									</tr>
+									
+									<?php 
+										if($get_data_pengajuan->isLembaga == 'YA')
+										{
+											echo'
+											<tr>
+												<td style="width:30%;"><b>Nama Lembaga</b></td><td>: '.$get_data_pengajuan->NAMA_MUSTAHIK.'</td>
+											</tr>
+											<tr>
+												<td style="width:30%;"><b>NIK</b></td><td>: -</td>
+											</tr>
+											<tr>
+												<td style="width:30%;"><b>Nama Pimpinan/Ketua</b></td><td>: '.$get_data_pengajuan->nama_perusahaan_mustahik.'</td>
+											</tr>
+											<tr>
+												<td style="width:30%;"><b>Jenis Lembaga</b></td><td>: '.$get_data_pengajuan->JENIS_MUSTAHIK.'</td>
+											</tr>
+											';
+										}
+										else
+										{
+											echo'
+											<tr>
+												<td style="width:30%;"><b>NIK</b></td><td>: '.$get_data_pengajuan->NIK_MUSTAHIK.'</td>
+											</tr>
+											<tr>
+												<td style="width:30%;"><b>Nama Lengkap</b></td><td>: '.$get_data_pengajuan->NAMA_MUSTAHIK.'</td>
+											</tr>
+											';
+										}
+									?>
+									
+									<tr>
+										<td style="width:30%;"><b>Alamat</b></td><td>: <?php echo ($get_data_pengajuan->ALAMAT_MUSTAHIK);?></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>No Telpon</b></td><td>: <?php echo ($get_data_pengajuan->HP_MUSTAHIK);?></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>No Rekening</b></td><td>: -</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="4">
+								<table width="100%" class="table table-hover" style="border-collapse: collapse;border:1px black solid;">
+									<tr style="border:1px black solid;">
+										<td colspan="2" style="background-color:white; text-align:center;"><b>IDENTIFIKASI PENGAJUAN (5W + 1H)</b></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>What ?</b></td><td>: <?php echo ($get_data_pengajuan->perihal);?></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>Who ?</b></td><td>: <?php echo ($get_data_pengajuan->NAMA_MUSTAHIK);?></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>Where ?</b></td><td>: <?php echo ($get_data_pengajuan->ALAMAT_MUSTAHIK);?></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>When ?</b></td><td>: <?php echo Tanggal($get_data_pengajuan->tgl_terima);?></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>Why ?</b></td><td>: <input type="text" name="why" id="why" style="width:95%; background-color:silver;" onchange="simpan_why()" value="<?php echo ($get_data_pengajuan->why);?>" /></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>How ?</b></td>
+										<td>: <span id="how"><?php echo ($get_data_pengajuan->uraian);?></span>
+										<!-- <input type="text" name="how" id="how" style="width:95%; background-color:silver;" onchange="simpan_how()" value="<?php echo ($get_data_pengajuan->how);?>" /> -->
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">.</td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>JENIS PENGAJUAN</b></td><td>: <span id="jenis_pengajuan"><?php echo ($get_data_pengajuan->jenis_pengajuan);?></span></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>ASNAF</b></td><td>: <span id="ashnaf"><?php echo ($get_data_pengajuan->ashnaf);?></span></td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>KODE PROGRAM</b></td>
+										<td>
+										:
+										
+										<select style="width:95%;" name="kode_program" id="kode_program" class="required form-control select2" title="Muzaki/Mustahik" onchange="simpan_kode_program()">
+										<?php 
+											if($get_data_pengajuan->kode_program == "")
+											{
+												echo'<option value="">== Pilih Kode Program ==</option>';
+											}
+											else
+											{
+												echo'<option value="'.$get_data_pengajuan->kode_program.'">'.$get_data_pengajuan->kode_program.' ('.$get_data_pengajuan->uraian.')</option>';
+											}
+										?>
+										<?php
+											if(!empty($list_kode_program))
+											{
+												$list_result = $list_kode_program->result();
+												foreach($list_result as $row)
+												{
+									echo'<option value="'.$row->kd_prog.'">'.$row->kd_prog.' ('.$row->uraian.')</option>';
+												}
+											}
+										?>
+									   </select>
+										
+										</td>
+									</tr>
+									<tr>
+										<td style="width:30%;"><b>PROGRAM</b></td>
+										<td>:</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<table width="100%" class="table table-hover" style="border-collapse: collapse;border:0px black solid;">
+												<tr>
+													<td>
+														<?php
+															if($get_data_pengajuan->no_prog == '1')
+															{
+																echo'<input type="checkbox" id="dakwah" value="SS" checked>Dakwah Advokasi';
+															}
+															else
+															{
+																echo'<input type="checkbox" id="dakwah" value="SS">Dakwah Advokasi';
+															}
+														?>
+													</td>
+													<td>
+														<?php
+															if($get_data_pengajuan->no_prog == '2')
+															{
+																echo'<input type="checkbox" id="kesehatan" value="SS" checked>Kesehatan';
+															}
+															else
+															{
+																echo'<input type="checkbox" id="kesehatan" value="SS">Kesehatan';
+															}
+														?>
+													</td>
+													<td>
+														<?php
+															if($get_data_pengajuan->no_prog == '3')
+															{
+																echo'<input type="checkbox" id="pendidikan" value="SS" checked>Pendidikan';
+															}
+															else
+															{
+																echo'<input type="checkbox" id="pendidikan" value="SS">Pendidikan';
+															}
+														?>
+														
+													</td>
+													<td>
+														<?php
+															if($get_data_pengajuan->no_prog == '4')
+															{
+																echo'<input type="checkbox" id="ekonomi" value="SS" checked>Ekonomi';
+															}
+															else
+															{
+																echo'<input type="checkbox" id="ekonomi" value="SS">Ekonomi';
+															}
+														?>
+														
+													</td>
+													<td>
+														<?php
+															if($get_data_pengajuan->no_prog == '5')
+															{
+																echo'<input type="checkbox" id="kemanusiaan" value="SS" checked>Kemanusiaan';
+															}
+															else
+															{
+																echo'<input type="checkbox" id="kemanusiaan" value="SS">Kemanusiaan';
+															}
+														?>
+														
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="4">
+								<table width="100%" class="table table-hover" style="border-collapse: collapse;border:1px black solid;">
+									<tr style="border:1px black solid;">
+										<td colspan="2" style="background-color:white; text-align:center;"><b>PENGESAHAN</b></td>
+									</tr>
+									<tr>
+										<td style="width:50%;text-align:left;border:1px black solid;">Diteruskan Kepada Sdr :
+											</br>
+											</br>
+											</br>
+											</br>
+											</br>
+										</td>
+										<td style="width:50%;text-align:left;border:1px black solid;">Dengan Hormat Harap :
+											</br>
+											</br>
+											</br>
+											</br>
+											</br>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2">Catatan : 
+										</br>
+										</br>
+										</br>
+										</br>
+										</br>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="4">
+								<table width="100%" class="table table-hover" style="border-collapse: collapse;border:1px black solid;">
+									<tr>
+										<td colspan="2" style="text-align:center;border:1px black solid;"><i>Telah diperiksa dan disetujui</i></td>
+										<td colspan="2" style="text-align:center;border:1px black solid;"><i>Telah diperiksa dan disetujui</i></td>
+									</tr>
+									<tr>
+										<td style="width:25%;text-align:center;border:1px black solid;"><br/><br/><br/>Drs.H.E. Badrudin Usman,M.Pd</td>
+										<td style="width:25%;text-align:center;border:1px black solid;"><br/><br/><br/>M. Kamaludin, S.Th.I</td>
+										<td style="width:25%;text-align:center;border:1px black solid;"><br/><br/><br/>DR. Atot Sugiri</td>
+										<td style="width:25%;text-align:center;border:1px black solid;"><br/><br/><br/>Yudith Asri Rahayu, SE</td>
+									</tr>
+									<tr>
+										<td style="width:25%;text-align:center;border:1px black solid;">Wakil Ketua II</td>
+										<td style="width:25%;text-align:center;border:1px black solid;">Kepala Divisi II</td>
+										<td style="width:25%;text-align:center;border:1px black solid;">Wakil Ketua III</td>
+										<td style="width:25%;text-align:center;border:1px black solid;">Kepala Divisi III</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2">
+								<!-- <a class="confirm-btn" href="<?php echo base_url().'gl-admin-disposisi/';?>" title = "Kembali" alt = "Kembali"> -->
+									<!-- <i class="fa fa-print"></i> KEMBALI -->
+								<!-- </a> -->
+							</td>
+							<td colspan="2" style="text-align:right;">
+								<?php
+									echo'
+										<br/>
+										<br/>
+										<a style="background-color:green; padding:2%;text-decoration: none;" class="confirm-btn" href="'.base_url().'gl-admin-disposisi-proses-print?id='.$get_data_pengajuan->id_pengajuan.'" id="PROSES-'.$get_data_pengajuan->id_pengajuan.'" onclick="proses_pengajuan(this)" title = "Cetak Disposisi Data '.$get_data_pengajuan->no_reg.'" alt = "Cetak Disposisi Data '.$get_data_pengajuan->no_reg.'">
+											<i class="fa fa-print"></i> PRINT/CETAK
+										</a>
+										';
+								?>
+							</td>
+						</tr>
+			
+				</table>
+			</div>
+			
+		
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+		
+		<center>
+			<?php
+				//echo '<br/>'.$data_h_penjualan->type_h_penjualan;
+			?>
+			<!-- <table style="width:100%; text-align:center;"> -->
+				<!-- <tr><td> -->
+					<!-- <font style="text-align:right;">TERIMA KASIH TELAH BERKUNJUNG, KAMI TUNGGU KEDATANGAN ANDA SELANJUTNYA</font> -->
+				<!-- </td></tr> -->
+			<!-- </table> -->
+			
+			
+		</center>
+	</body>
+	
+	<script type='text/javascript'>
+	
+		function simpan_why()
+		{
+		
+			var id_pengajuan = $("#id_pengajuan").val();
+			var berdasarkan = "why";
+			var isi = $('#why').val();
+		
+			//alert(id_pengajuan);
+			
+			
+			$.ajax({type: "POST", url: "<?php echo base_url();?>C_gl_admin_disposisi/edit_1_field", data: {id_pengajuan:id_pengajuan,berdasarkan:berdasarkan,isi:isi}, success:function(data)
+			{
+				if(data!=0)
+				{
+					//$("#tb_cari_produk").html(data);
+					//tampilkan_list_d_penjualan();
+				} 
+				else
+				{
+					//$("#tb_cari_produk").html("Tidak Ada Data Yang Ditampilkan");
+					//tampilkan_list_d_penjualan();
+				}
+			}
+			});
+			
+		}
+		
+		function simpan_how()
+		{
+		
+			var id_pengajuan = $("#id_pengajuan").val();
+			var berdasarkan = "how";
+			var isi = $('#how').val();
+		
+			//alert(id_pengajuan);
+			
+			
+			$.ajax({type: "POST", url: "<?php echo base_url();?>C_gl_admin_disposisi/edit_1_field", data: {id_pengajuan:id_pengajuan,berdasarkan:berdasarkan,isi:isi}, success:function(data)
+			{
+				if(data!=0)
+				{
+					//$("#tb_cari_produk").html(data);
+					//tampilkan_list_d_penjualan();
+				} 
+				else
+				{
+					//$("#tb_cari_produk").html("Tidak Ada Data Yang Ditampilkan");
+					//tampilkan_list_d_penjualan();
+				}
+			}
+			});
+			
+		}
+		
+		function simpan_kode_program()
+		{
+		
+			var id_pengajuan = $("#id_pengajuan").val();
+			var berdasarkan = "kode_program";
+			var isi = $('#kode_program').val();
+		
+			//alert(id_pengajuan);
+			
+			
+			$.ajax({type: "POST", url: "<?php echo base_url();?>C_gl_admin_disposisi/edit_1_field_2", data: {id_pengajuan:id_pengajuan,berdasarkan:berdasarkan,isi:isi}, success:function(data)
+			{
+				if(data!=0)
+				{
+					//$("#tb_cari_produk").html(data);
+					//tampilkan_list_d_penjualan();
+					//alert(data);
+					
+					var arrStrId = data;
+					var arrIdSplit = arrStrId.split("|");
+					
+					var prog = arrIdSplit[0];
+					var ashnaf = arrIdSplit[1];
+					var uraian = arrIdSplit[2];
+					var no_prog = arrIdSplit[3];
+					
+					$('#ashnaf').html(ashnaf);
+					$('#how').html(uraian);
+					//$('#no_prog').html(no_prog);
+					
+					//alert(no_prog);
+					if(no_prog == "1")
+					{
+						$('#dakwah').prop('checked', true);
+						$('#kesehatan').prop('checked', false);
+						$('#pendidikan').prop('checked', false);
+						$('#ekonomi').prop('checked', false);
+						$('#kemanusiaan').prop('checked', false);
+					}
+					else if(no_prog == "2")
+					{
+						$('#dakwah').prop('checked', false);
+						$('#kesehatan').prop('checked', true);
+						$('#pendidikan').prop('checked', false);
+						$('#ekonomi').prop('checked', false);
+						$('#kemanusiaan').prop('checked', false);
+					}
+					else if(no_prog == "3")
+					{
+						$('#dakwah').prop('checked', false);
+						$('#kesehatan').prop('checked', false);
+						$('#pendidikan').prop('checked', true);
+						$('#ekonomi').prop('checked', false);
+						$('#kemanusiaan').prop('checked', false);
+					}
+					else if(no_prog == "4")
+					{
+						$('#dakwah').prop('checked', false);
+						$('#kesehatan').prop('checked', false);
+						$('#pendidikan').prop('checked', false);
+						$('#ekonomi').prop('checked', true);
+						$('#kemanusiaan').prop('checked', false);
+					}
+					else if(no_prog == "5")
+					{
+						$('#dakwah').prop('checked', false);
+						$('#kesehatan').prop('checked', false);
+						$('#pendidikan').prop('checked', false);
+						$('#ekonomi').prop('checked', false);
+						$('#kemanusiaan').prop('checked', true);
+					}
+					
+					
+					
+				} 
+				else
+				{
+					//$("#tb_cari_produk").html("Tidak Ada Data Yang Ditampilkan");
+					//tampilkan_list_d_penjualan();
+				}
+			}
+			});
+			
+		}
+		
+		function test_kode_program()
+		{
+			alert("test");
+		}
+	</script>
+	
+	<script src="<?php echo base_url();?>assets/adminlte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="<?=base_url();?>assets/admin/js/jquery.validate.min.js"></script>
+	<!-- Bootstrap 3.3.4 -->
+	<!-- <script src="<?php echo base_url();?>assets/adminlte/bootstrap/js/bootstrap.min.js"></script> -->
+	
+	<!-- Bootstrap 3.3.4 -->
+	<script src="<?=base_url();?>assets/adminlte/bootstrap/js/bootstrap.min.js"></script>
+	<!-- Slimscroll -->
+	<script src="<?=base_url();?>assets/adminlte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+	<!-- FastClick -->
+	<script src="<?=base_url();?>assets/adminlte/plugins/fastclick/fastclick.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="<?=base_url();?>assets/adminlte/dist/js/app.min.js"></script>
+	<!-- Page script -->
+    <!-- InputMask -->
+    <script src="<?=base_url();?>/assets/adminlte/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="<?=base_url();?>/assets/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="<?=base_url();?>/assets/adminlte/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+	
+	<!-- bootstrap datepicker -->
+	<script src="<?=base_url();?>/assets/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	
+	<!-- CK Editor -->
+	<script src="<?php echo base_url();?>assets/adminlte/bower_components/ckeditor/ckeditor.js"></script>
+	<!-- Bootstrap WYSIHTML5 -->
+	<script src="<?php echo base_url();?>assets/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+</html>

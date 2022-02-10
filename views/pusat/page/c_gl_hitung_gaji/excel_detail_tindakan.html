@@ -1,0 +1,108 @@
+ <title>Laporan Detail Tindakan</title>
+ 
+ <?php
+ $title = "Laporan-Gaji";
+ header('Content-Type: application/vnd.ms-excel');
+ header('Content-Disposition: attachment;filename="Laporan Detail Tindakan.xls"');
+
+ 
+ ?>
+
+<table class="table table-bordered table-striped" id="mytable">
+    <thead>
+        <tr>
+            <th width="40px">No</th>
+		    <th width="180px">Tanggal</th>
+            <th width="180px">No Transaksi</th>
+            <th width="180px">Pasien</th>
+            <th width="250px">Promo</th>
+			<th width="180px">Nama Dokter</th>
+            <th width="180px">Masa Kerja</th>
+            <th width="180px">Terapis</th>
+		    <th width="80px">Tindakan</th>
+		    <th width="40px">Qty</th>
+		    <th>Harga</th>
+		    <th>Diskon</th>
+		    <th>Subtotal</th>
+		    <th width="50px">Fee</th>
+		    <th>Nominal</th>
+        </tr>
+    </thead>
+    <tbody>
+    	<?php
+    		$no=1;
+    		$subtotal=0;
+    		$total_fee=0;
+    		$no_faktur='';
+
+    		foreach($data as $row)
+    		{
+    	?>
+    		<tr>
+    			<td><?=$no;?></td>
+    			<td><?=$row->tgl_h_penjualan;?></td>
+    			<td><?=$row->no_faktur;?></td>
+    			<td><?=$row->nama_costumer;?></td>
+				<td><font color="blue"><?=$row->nama_diskon;?></font></td>
+				<td><?=$row->nama_karyawan;?></td>
+				<td><?=$row->masa_kerja;?></td>
+				<td><?=$row->nama_terapis;?></td>
+				
+    			<td><p>
+    				<?php
+    					echo $row->nama_produk.'<br>';
+    				?>
+    				</p>
+    			</td>
+    			<td><?=$row->jumlah_konversi;?></td>
+    			<td><?=round($row->harga_konversi);?></td>
+    			<td><?=$row->diskon.' '.$row->optr_diskon;?></td>
+    			<td><?=round($row->subtotal);?></td>
+    			<td><?=$row->fee_tindakan;?></td>
+    			<td><?=round($row->fee_nominal);?></td>
+    		</tr>
+    	<?php
+    			$no++;
+    			$no_faktur = $row->no_faktur;
+    			$subtotal += $row->subtotal;
+    			$total_fee += $row->fee_nominal;
+    		}
+    	?>
+    	<tr>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+    		<td><strong>Total</strong></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td><?=round($subtotal);?></td>
+    		<td></td>
+    		<td><?=round($total_fee);?></td>
+    	</tr>
+    	<tr>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    		<td></td>
+    	</tr>
+    </tbody>
+</table>
