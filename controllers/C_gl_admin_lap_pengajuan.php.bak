@@ -57,7 +57,7 @@ class C_gl_admin_lap_pengajuan extends CI_Controller {
 				
 				
 				$order_by = " ORDER BY A.tgl_ins DESC";
-				$list_pengajuan = false; //$this->M_gl_pengajuan->list_pengajuan_limit($cari,$order_by,1000000,0);
+				$list_pengajuan = $this->M_gl_pengajuan->list_pengajuan_limit($cari,$order_by,1000000,0);
 				
 				$list_by_jenis_bantuan = $this->M_gl_pengajuan->list_lap_by_group_sum($cari,'A.jenis_pengajuan');
 				
