@@ -1577,8 +1577,8 @@ $route['gl-admin-images-hapus/(:any)/(:any)/(:any)'] = 'C_gl_admin_images/hapus'
 
 
 //BAZNAS
-	$route['gl-admin-cek-pasien'] = "C_gl_admin_cek_pasien/index";
-	$route['gl-admin-cek-pasien/(:any)'] = 'C_gl_admin_cek_pasien/index';
+	$route['gl-admin-cek-pasien'] = "C_gl_admin_cek_pengajuan/index";
+	$route['gl-admin-cek-pasien/(:any)'] = 'C_gl_admin_cek_pengajuan/index';
 	
 	$route['gl-admin-pengajuan'] = "C_gl_admin_pengajuan/index";
 	$route['gl-admin-pengajuan/(:any)'] = 'C_gl_admin_pengajuan/index';

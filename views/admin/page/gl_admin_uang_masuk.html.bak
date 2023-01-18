@@ -813,7 +813,6 @@
 		$('input[name=id_kat_uang_masuk]').val($('#id_kode_akun_1_'+id).val());
 		$('input[name=kode_akun]').val($('#kode_akun_1_'+id).val());
 		$('input[name=nama_kode_akun]').val($('#nama_kode_akun_1_'+id).val());
-		$('input[name=untuk]').val($('#nama_kode_akun_1_'+id).val());
 	}
 	
 	function edit(id)

@@ -61,9 +61,7 @@ class C_gl_admin_costumer extends CI_Controller {
 								OR A.nik LIKE '%".str_replace("'","",$_GET['cari'])."%' 
 								OR A.nama_lengkap LIKE '%".str_replace("'","",$_GET['cari'])."%' 
 								OR A.hp LIKE '%".str_replace("'","",$_GET['cari'])."%' 
-								OR A.hp_pnd LIKE '%".str_replace("'","",$_GET['cari'])."%' 
-								OR A.alamat_rumah_sekarang LIKE '%".str_replace("'","",$_GET['cari'])."%' 
-							)
+								OR A.hp_pnd LIKE '%".str_replace("'","",$_GET['cari'])."%' )
 							";
 				}
 				else
