@@ -202,37 +202,6 @@
 								<!-- <input type="text" id="nama_kode_akun" name="nama_kode_akun"  maxlength="35" class="required form-control" size="35" alt="nama_kode_akun (NB: Tidak bisa diisi, hanya memilih)" title="nama_kode_akun (NB: Tidak bisa diisi, hanya memilih)" placeholder="*nama_kode_akun (NB: Tidak bisa diisi, hanya memilih)" disabled="true"/> -->
 							<!-- </div> -->
 							
-							<!-- KODE KREDIT -->
-							<div class="box box-success collapsed-box box-solid">
-								<div class="box-header with-border">
-									<h3 class="box-title">Pilih Kode Akun/COA/Kredit</h3>
-									<div class="box-tools pull-right">
-										<button class="btn btn-box-tool" data-widget="collapse"><i id="icon_form" class="fa fa-plus"></i></button>
-									</div><!-- /.box-tools -->
-								</div><!-- /.box-header -->
-								<div class="box-body">
-			
-									<label for="id_kat_uang_masuk">Pilih Kode Akun/COA</label>
-									<div class="input-group input-group-sm">
-										<input type="hidden" id="id_kat_uang_masuk" name="id_kat_uang_masuk" />
-										<input type="text" id="kode_akun" name="kode_akun"  maxlength="35" class="required form-control" size="35" alt="Kode Akun/COA (NB: Tidak bisa diisi, hanya memilih)" title="Kode Akun/COA (NB: Tidak bisa diisi, hanya memilih)" placeholder="*Kode Akun/COA (NB: Tidak bisa diisi, hanya memilih)" disabled="true"/>
-										<span class="input-group-btn">
-										<button class="btn btn-info btn-flat" type="button" title="Cari Dokter" data-toggle="modal" data-target="#myModal_akun" onclick="list_data_akun()">...</button>
-										</span>
-									</div><!-- /input-group<br />-->
-									<br />
-									
-									<div class="form-group">
-										<label for="nama_kode_akun">Nama Akun/COA</label>
-										<input type="text" id="nama_kode_akun" name="nama_kode_akun"  maxlength="35" class="required form-control" size="35" alt="nama_kode_akun (NB: Tidak bisa diisi, hanya memilih)" title="nama_kode_akun (NB: Tidak bisa diisi, hanya memilih)" placeholder="*nama_kode_akun (NB: Tidak bisa diisi, hanya memilih)" disabled="true"/>
-									</div>
-									
-									
-								</div>
-							</div>
-							<!-- KODE KREDIT -->
-							
-							
 							<!-- DATA COSTUMER -->
 							<div class="box box-success collapsed-box box-solid">
 								<div class="box-header with-border">
@@ -263,6 +232,35 @@
 							</div>
 							<!-- DATA COSTUMER -->
 							
+							<!-- KODE KREDIT -->
+							<div class="box box-success collapsed-box box-solid">
+								<div class="box-header with-border">
+									<h3 class="box-title">Pilih Kode Akun/COA/Kredit</h3>
+									<div class="box-tools pull-right">
+										<button class="btn btn-box-tool" data-widget="collapse"><i id="icon_form" class="fa fa-plus"></i></button>
+									</div><!-- /.box-tools -->
+								</div><!-- /.box-header -->
+								<div class="box-body">
+			
+									<label for="id_kat_uang_masuk">Pilih Kode Akun/COA</label>
+									<div class="input-group input-group-sm">
+										<input type="hidden" id="id_kat_uang_masuk" name="id_kat_uang_masuk" />
+										<input type="text" id="kode_akun" name="kode_akun"  maxlength="35" class="required form-control" size="35" alt="Kode Akun/COA (NB: Tidak bisa diisi, hanya memilih)" title="Kode Akun/COA (NB: Tidak bisa diisi, hanya memilih)" placeholder="*Kode Akun/COA (NB: Tidak bisa diisi, hanya memilih)" disabled="true"/>
+										<span class="input-group-btn">
+										<button class="btn btn-info btn-flat" type="button" title="Cari Dokter" data-toggle="modal" data-target="#myModal_akun" onclick="list_data_akun()">...</button>
+										</span>
+									</div><!-- /input-group<br />-->
+									<br />
+									
+									<div class="form-group">
+										<label for="nama_kode_akun">Nama Akun/COA</label>
+										<input type="text" id="nama_kode_akun" name="nama_kode_akun"  maxlength="35" class="required form-control" size="35" alt="nama_kode_akun (NB: Tidak bisa diisi, hanya memilih)" title="nama_kode_akun (NB: Tidak bisa diisi, hanya memilih)" placeholder="*nama_kode_akun (NB: Tidak bisa diisi, hanya memilih)" disabled="true"/>
+									</div>
+									
+									
+								</div>
+							</div>
+							<!-- KODE KREDIT -->
 							
 							<div class="form-group">
 								<label for="id_bank">BANK</label>
@@ -328,7 +326,8 @@
 		
 						<div class="box-footer">
 							<button type="reset" id="btnbatal" class="btn btn-default">Batal</button>
-							<button type="submit" id="btnsimpan" class="confirm-btn btn btn-primary" title="Simpan Data <?php echo $msgbox_title;?> ?">Simpan</button>
+							<!-- <button type="submit" id="btnsimpan" class="confirm-btn btn btn-primary" title="Simpan Data <?php echo $msgbox_title;?> ?">Simpan</button> -->
+							<button type="button" id="btnsimpan" class="btn btn-primary" title="Simpan Data <?php echo $msgbox_title;?> ?" onclick="simpan_ajax()">Simpan</button>
 						</div>
 						</form>
 					<!-- ISI FORM -->
@@ -401,6 +400,16 @@
 													<button type="submit" id="btnsimpan" class="btn btn-success btn-block btn-flat" title="Pencarian Data <?php echo $msgbox_title;?> ?">CARI</button>
 												</div>
 											</td>
+											<td>
+												<div class="form-group">
+													<label for="nama_satuan"></label>
+													
+													<!-- <button type="button" id="btnsimpan" onclick="cari_col_active()" class="btn btn-success btn-block btn-flat" title="Pencarian Data <?php echo $msgbox_title;?> ?">CARI</button> -->
+													
+													<button type="button" id="btn_refresh" class="btn btn-default btn-block btn-flat" title="Refresh Data <?php echo $msgbox_title;?> ?" onclick="list_uang_masuk()">REFRESH</button>
+												</div>
+											</td>
+											
 										</tr>
 									</table>
 								</form>
@@ -413,12 +422,12 @@
 							<p style="color:red;"><?php echo $sum_pesan; ?></p>
 							
 						</div><!-- /.box-header -->
-						<div class="box-body table-responsive no-padding">
+						<div class="box-body table-responsive no-padding" id="table_transaksi">
 						
 						
 						<?php
 							//TABLE
-							if(!empty($list_uang_masuk))
+								if(!empty($list_uang_masuk))
 								{
 									//echo gethostname();
 									//echo $this->M_gl_pengaturan->getUserIpAddr();
@@ -675,6 +684,106 @@
 			
 		
 <script type='text/javascript'>
+	function simpan_ajax()
+	{
+		var r = confirm("Apakah Anda Yakin Akan Menyelesaikan Transaksi ?");
+		if (r == true) 
+		{
+			
+			var id_kat_uang_masuk = $('#id_kat_uang_masuk').val();
+			var id_costumer = $('#id_costumer').val();
+			var id_bank = $('#id_bank').val();
+			var no_bukti = $('#no_bukti').val();
+			var nama_uang_masuk = $('#nama_uang_masuk').val();
+			var terima_dari = $('#terima_dari').val();
+			var diterima_oleh = $('#diterima_oleh').val();
+			var untuk = $('#untuk').val();
+			
+			var nominal = $('#nominal').val(); //ORI
+			nominal = nominal.replace(',','');
+			nominal = nominal.replace(',','');
+			nominal = nominal.replace(',','');
+			nominal = nominal.replace(',','');
+			
+			var ket_uang_masuk = $('#ket_uang_masuk').val();
+			var tgl_uang_masuk = $('#tgl_uang_masuk').val();
+			
+			if((id_kat_uang_masuk == '') || (id_costumer == '') || (nominal == ''))
+			{
+				alert("Harap isi data dengan benar !");
+			}
+			else
+			{
+				$.ajax({type: "POST", url: "<?php echo base_url();?>C_gl_admin_uang_masuk/simpan_ajax/"
+				, data: 
+					{
+						id_kat_uang_masuk:id_kat_uang_masuk
+						,id_costumer:id_costumer
+						,id_bank:id_bank
+						,nama_uang_masuk:nama_uang_masuk
+						,terima_dari:terima_dari
+						,diterima_oleh:diterima_oleh
+						,untuk:untuk
+						,nominal:nominal
+						,ket_uang_masuk:ket_uang_masuk
+						,tgl_uang_masuk:tgl_uang_masuk
+					}
+				, success:function(data)
+				{
+					if(data!=0)
+					{
+						//$("#table_transaksi").html(data);
+						list_uang_masuk();
+						
+						$('#no_bukti').val(data);
+						//$('#nama_uang_masuk').val("");
+						$('#terima_dari').val("");
+						$('#diterima_oleh').val("");
+						//$('#untuk').val("");
+						$('#nominal').val("0");
+						$('#ket_uang_masuk').val("");
+						
+						alert("DATA BERHASIL DISIMPAN !");
+					} 
+					else
+					{
+						$("#table_transaksi").html("Tidak Ada Data Yang Ditampilkan");
+					}
+				}
+				});
+			}
+		}
+	}
+
+	function list_uang_masuk()
+	{
+		//alert("Hallo");
+		var cari = $("#cari").val();
+		var dari = $("#dari").val();
+		var sampai = $("#sampai").val();
+		var limit = 15;
+		var offset = 0;
+		
+		//alert(id_h_penjualan);
+		
+		//$("#table_transaksi").html("<img src='<?php echo base_url();?>assets/global/loading.gif'>Cek Data ...");
+		
+		$.ajax({type: "POST", url: "<?php echo base_url();?>C_gl_admin_uang_masuk/ajax_list_uang_masuk/"
+		, data: {cari:cari,dari:dari,sampai:sampai,limit:limit,offset:offset}
+		, success:function(data)
+		{
+			if(data!=0)
+			{
+				$("#table_transaksi").html(data);
+			} 
+			else
+			{
+				$("#table_transaksi").html("Tidak Ada Data Yang Ditampilkan");
+			}
+		}
+		});
+	}
+
 	function list_data_muzaki()
 	{
 		var cari = $("#cari_json_muzaki").val();
