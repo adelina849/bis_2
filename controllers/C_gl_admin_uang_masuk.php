@@ -462,30 +462,77 @@ class C_gl_admin_uang_masuk extends CI_Controller {
 	
 	function simpan_ajax()
 	{
-		$this->M_gl_uang_masuk->simpan
-		(
-			$_POST['id_kat_uang_masuk'],
-			$_POST['id_costumer'],
-			'', //$_POST['id_supplier'],
-			$_POST['id_bank'],
-			'', //$_POST['id_retur_penjualan'],
-			'', //$_POST['id_retur_pembelian'],
-			'', //$_POST['id_karyawan'],
-			'', //$_POST['id_d_assets'],
-			$_POST['no_bukti'],
-			$_POST['nama_uang_masuk'],
-			$_POST['terima_dari'],
-			$_POST['diterima_oleh'],
-			$_POST['untuk'],
-			str_replace(",","",$_POST['nominal']) , //$_POST['nominal'],
-			$_POST['ket_uang_masuk'],
-			$_POST['tgl_uang_masuk'],
-			'', //$_POST['isTabungan'],
-			'', //$_POST['isPiutang'],
-			'', //$_POST['noPinjamanCos'],
-			$this->session->userdata('ses_id_karyawan'),
-			$this->session->userdata('ses_kode_kantor')
-		);
+		if (!empty($_POST['stat_edit']) && ($_POST['stat_edit'] != ''))
+		{
+			$this->M_gl_uang_masuk->edit
+			(
+				$_POST['stat_edit'],
+				$_POST['id_kat_uang_masuk'],
+				$_POST['id_costumer'],
+				'', //$_POST['id_supplier'],
+				$_POST['id_bank'],
+				'', //$_POST['id_retur_penjualan'],
+				'', //$_POST['id_retur_pembelian'],
+				'', //$_POST['id_karyawan'],
+				'', //$_POST['id_d_assets'],
+				$_POST['no_bukti'],
+				$_POST['nama_uang_masuk'],
+				$_POST['terima_dari'],
+				$_POST['diterima_oleh'],
+				$_POST['untuk'],
+				str_replace(",","",$_POST['nominal']) , //$_POST['nominal'],
+				$_POST['ket_uang_masuk'],
+				$_POST['tgl_uang_masuk'],
+				'', //$_POST['isTabungan'],
+				'', //$_POST['isPiutang'],
+				'', //$_POST['noPinjamanCos'],
+				$this->session->userdata('ses_id_karyawan'),
+				$this->session->userdata('ses_kode_kantor')
+			);
+			
+			/* CATAT AKTIFITAS EDIT*/
+			if($this->session->userdata('catat_log') == 'Y')
+			{
+				$this->M_gl_log->simpan_log
+				(
+					$this->session->userdata('ses_id_karyawan'),
+					'UPDATE',
+					'Melakukan perubahan data uang masuk '.$_POST['no_bukti'].' | '.$_POST['nama_uang_masuk'],
+					$this->M_gl_pengaturan->getUserIpAddr(),
+					gethostname(),
+					$this->session->userdata('ses_kode_kantor')
+				);
+			}
+			/* CATAT AKTIFITAS EDIT*/
+		}
+		else
+		{
+			$this->M_gl_uang_masuk->simpan
+			(
+				$_POST['id_kat_uang_masuk'],
+				$_POST['id_costumer'],
+				'', //$_POST['id_supplier'],
+				$_POST['id_bank'],
+				'', //$_POST['id_retur_penjualan'],
+				'', //$_POST['id_retur_pembelian'],
+				'', //$_POST['id_karyawan'],
+				'', //$_POST['id_d_assets'],
+				$_POST['no_bukti'],
+				$_POST['nama_uang_masuk'],
+				$_POST['terima_dari'],
+				$_POST['diterima_oleh'],
+				$_POST['untuk'],
+				str_replace(",","",$_POST['nominal']) , //$_POST['nominal'],
+				$_POST['ket_uang_masuk'],
+				$_POST['tgl_uang_masuk'],
+				'', //$_POST['isTabungan'],
+				'', //$_POST['isPiutang'],
+				'', //$_POST['noPinjamanCos'],
+				$this->session->userdata('ses_id_karyawan'),
+				$this->session->userdata('ses_kode_kantor')
+			);
+		}
+		
 		
 		//echo'BERHASIL';
 		//DAPATKAN NO UANG masuk

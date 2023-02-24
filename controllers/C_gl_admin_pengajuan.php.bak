@@ -464,7 +464,7 @@ class C_gl_admin_pengajuan extends CI_Controller {
 						$_POST['isLembaga'],
 						$this->session->userdata('ses_id_karyawan'),
 						$this->session->userdata('ses_kode_kantor'),
-						$_POST['no_tlp_pengaju'] //no_hp
+						$_POST['no_hp']
 					);
 					
 					
@@ -499,7 +499,7 @@ class C_gl_admin_pengajuan extends CI_Controller {
 						$_POST['isLembaga'],
 						$this->session->userdata('ses_id_karyawan'),
 						$this->session->userdata('ses_kode_kantor'),
-						$_POST['no_tlp_pengaju'] //no_hp
+						$_POST['no_hp']
 					
 					);
 					

@@ -208,10 +208,10 @@
 													echo '<th width="5%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">NO</th>';
 													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Tanggal</th>';
 													
-													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">No Reg</th>';
-													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Nama Pengaju</th>';
-													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">No Tlp</th>';
-													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Nama Mustahik</th>';
+													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">NO REG</th>';
+													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">NAMA PENGAJU</th>';
+													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">NO TLP</th>';
+													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">NAMA MUSTAHIK</th>';
 													
 													echo '<th width="20%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Uraian</th>';
 													echo '<th width="10%" rowspan="2" style="border:1px solid black;text-align:center; font-weight:bold;">Kecamatan</th>';
@@ -238,13 +238,6 @@
 											echo'<tr>';
 												echo'<td style="border:1px solid black;">'.$no.'</td>';
 												echo'<td style="border:1px solid black;">'.$row->tgl_terima.'</td>';
-												
-												echo'<td style="border:1px solid black;">'.$row->no_reg.'</td>';
-												echo'<td style="border:1px solid black;">'.$row->NAMA_PENGAJU.'</td>';
-												echo'<td style="border:1px solid black;">'.$row->HP_PENGAJU.'</td>';
-												echo'<td style="border:1px solid black;">'.$row->NAMA_MUSTAHIK.'</td>';
-												
-												
 												echo'<td style="border:1px solid black;">'.$row->uraian.'</td>';
 												
 												echo'<td style="border:1px solid black;">'.$row->KEC_MUSTAHIK.'</td>';

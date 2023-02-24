@@ -689,7 +689,7 @@
 		var r = confirm("Apakah Anda Yakin Akan Menyelesaikan Transaksi ?");
 		if (r == true) 
 		{
-			
+			var stat_edit = $('#stat_edit').val();
 			var id_kat_uang_masuk = $('#id_kat_uang_masuk').val();
 			var id_costumer = $('#id_costumer').val();
 			var id_bank = $('#id_bank').val();
@@ -717,9 +717,11 @@
 				$.ajax({type: "POST", url: "<?php echo base_url();?>C_gl_admin_uang_masuk/simpan_ajax/"
 				, data: 
 					{
-						id_kat_uang_masuk:id_kat_uang_masuk
+						stat_edit:stat_edit
+						,id_kat_uang_masuk:id_kat_uang_masuk
 						,id_costumer:id_costumer
 						,id_bank:id_bank
+						,no_bukti:no_bukti
 						,nama_uang_masuk:nama_uang_masuk
 						,terima_dari:terima_dari
 						,diterima_oleh:diterima_oleh
@@ -923,6 +925,7 @@
 		$('input[name=kode_akun]').val($('#kode_akun_1_'+id).val());
 		$('input[name=nama_kode_akun]').val($('#nama_kode_akun_1_'+id).val());
 		$('input[name=untuk]').val($('#nama_kode_akun_1_'+id).val());
+		$('input[name=nama_uang_masuk]').val($('#nama_kode_akun_1_'+id).val());
 	}
 	
 	function edit(id)

@@ -26,7 +26,7 @@
 													CONCAT(COALESCE(B.alamat_rumah_sekarang,''),', ',COALESCE(B.DESA_PENGAJU,''),', ',COALESCE(B.KEC_PENGAJU,''))
 													, 2))) AS ALAMAT_PENGAJU
 							
-							,COALESCE(B.hp,'') AS HP_PENGAJU
+							,COALESCE(A.no_hp,B.hp) AS HP_PENGAJU
 							,COALESCE(B.JENIS_PENGAJU,'') AS JENIS_PENGAJU
 							,COALESCE(B.isLembaga,'') AS PENGAJU_ISLEMBAGA
 							
@@ -72,6 +72,7 @@
 						LEFT JOIN
 						(
 							SELECT
+								DISTINCT
 								A.*
 								,COALESCE(B.name,'') AS KEC_PENGAJU
 								,COALESCE(C.name,'') AS DESA_PENGAJU
@@ -99,6 +100,7 @@
 						LEFT JOIN
 						(
 							SELECT
+								DISTINCT
 								A.*
 								,COALESCE(B.name,'') AS KEC_MUSTAHIK
 								,COALESCE(C.name,'') AS DESA_MUSTAHIK
@@ -139,6 +141,7 @@
 						(
 							SELECT DISTINCT kode_kantor,kd_prog,prog,ashnaf,uraian
 							FROM tb_kode_program
+							WHERE isAktif = 'YA'
 							GROUP BY kode_kantor,kd_prog,prog,ashnaf,uraian
 						) AS E ON A.kode_kantor = E.kode_kantor AND A.kode_program = E.kd_prog
 						".$cari."
@@ -242,7 +245,8 @@
 			$perihal,
 			$isLembaga,
 			$user_ins,
-			$kode_kantor
+			$kode_kantor,
+			$no_hp
 		)
 		{
 			$strquery = "
@@ -263,7 +267,8 @@
 					tgl_updt,
 					user_ins,
 					user_updt,
-					kode_kantor
+					kode_kantor,
+					no_hp
 				)
 				VALUES
 				(
@@ -306,7 +311,8 @@
 					NOW(),
 					'".$user_ins."',
 					'',
-					'".$kode_kantor."'
+					'".$kode_kantor."',
+					'".$no_hp."'
 				)
 			";
 			
@@ -330,7 +336,8 @@
 			$perihal,
 			$isLembaga,
 			$user_updt,
-			$kode_kantor
+			$kode_kantor,
+			$no_hp
 		)
 		{
 			$strquery = "
@@ -346,7 +353,8 @@
 						perihal = '".$perihal."',
 						isLembaga = '".$isLembaga."',
 						tgl_updt = NOW(),
-						user_updt = '".$user_updt."'
+						user_updt = '".$user_updt."',
+						no_hp = '".$no_hp."'
 					WHERE kode_kantor = '".$kode_kantor."' AND id_pengajuan = '".$id_pengajuan
 					."'
 					";

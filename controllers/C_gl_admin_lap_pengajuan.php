@@ -156,6 +156,9 @@ class C_gl_admin_lap_pengajuan extends CI_Controller {
 						(
 							COALESCE(B.KEC_PENGAJU,'') LIKE '%".$_GET['cari']."%'
 							OR COALESCE(C.KEC_MUSTAHIK,'') LIKE '%".$_GET['cari']."%'
+							OR COALESCE(B.nama_lengkap,'') LIKE '%".$_GET['cari']."%'
+							OR COALESCE(C.nama_lengkap,'') LIKE '%".$_GET['cari']."%'
+							OR COALESCE(A.no_reg,'') LIKE '%".$_GET['cari']."%'
 						)
 				
 					";
@@ -214,6 +217,9 @@ class C_gl_admin_lap_pengajuan extends CI_Controller {
 						(
 							COALESCE(B.KEC_PENGAJU,'') LIKE '%".$_GET['cari']."%'
 							OR COALESCE(C.KEC_MUSTAHIK,'') LIKE '%".$_GET['cari']."%'
+							OR COALESCE(B.nama_lengkap,'') LIKE '%".$_GET['cari']."%'
+							OR COALESCE(C.nama_lengkap,'') LIKE '%".$_GET['cari']."%'
+							OR COALESCE(A.no_reg,'') LIKE '%".$_GET['cari']."%'
 						)
 				
 					";

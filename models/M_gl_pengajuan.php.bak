@@ -72,6 +72,7 @@
 						LEFT JOIN
 						(
 							SELECT
+								DISTINCT
 								A.*
 								,COALESCE(B.name,'') AS KEC_PENGAJU
 								,COALESCE(C.name,'') AS DESA_PENGAJU
@@ -99,6 +100,7 @@
 						LEFT JOIN
 						(
 							SELECT
+								DISTINCT
 								A.*
 								,COALESCE(B.name,'') AS KEC_MUSTAHIK
 								,COALESCE(C.name,'') AS DESA_MUSTAHIK
@@ -139,6 +141,7 @@
 						(
 							SELECT DISTINCT kode_kantor,kd_prog,prog,ashnaf,uraian
 							FROM tb_kode_program
+							WHERE isAktif = 'YA'
 							GROUP BY kode_kantor,kd_prog,prog,ashnaf,uraian
 						) AS E ON A.kode_kantor = E.kode_kantor AND A.kode_program = E.kd_prog
 						".$cari."
@@ -242,7 +245,8 @@
 			$perihal,
 			$isLembaga,
 			$user_ins,
-			$kode_kantor
+			$kode_kantor,
+			$no_hp
 		)
 		{
 			$strquery = "
@@ -263,7 +267,8 @@
 					tgl_updt,
 					user_ins,
 					user_updt,
-					kode_kantor
+					kode_kantor,
+					no_hp
 				)
 				VALUES
 				(
@@ -306,7 +311,8 @@
 					NOW(),
 					'".$user_ins."',
 					'',
-					'".$kode_kantor."'
+					'".$kode_kantor."',
+					'".$no_hp."'
 				)
 			";
 			
@@ -330,7 +336,8 @@
 			$perihal,
 			$isLembaga,
 			$user_updt,
-			$kode_kantor
+			$kode_kantor,
+			$no_hp
 		)
 		{
 			$strquery = "
@@ -346,7 +353,8 @@
 						perihal = '".$perihal."',
 						isLembaga = '".$isLembaga."',
 						tgl_updt = NOW(),
-						user_updt = '".$user_updt."'
+						user_updt = '".$user_updt."',
+						no_hp = '".$no_hp."'
 					WHERE kode_kantor = '".$kode_kantor."' AND id_pengajuan = '".$id_pengajuan
 					."'
 					";
@@ -394,7 +402,7 @@
 		
 		function get_no_pengajuan($kode_kantor)
         {
-			$query = "SELECT MAX(no_reg + '0.00') + 1 AS NO_REG_FORMAT FROM tb_pengajuan WHERE kode_kantor = '".$kode_kantor."';";
+			$query = "SELECT MAX(no_reg + '0.00') + 1 AS NO_REG_FORMAT FROM tb_pengajuan WHERE kode_kantor = '".$kode_kantor."' AND YEAR(tgl_ins) = YEAR(NOW()) ;";
 			
             //$query = $this->db->get_where('tb_pengajuan', array($berdasarkan => $cari,'kode_kantor' => $this->session->userdata('ses_kode_kantor')));
 			
