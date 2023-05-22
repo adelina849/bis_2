@@ -26,7 +26,7 @@
 													CONCAT(COALESCE(B.alamat_rumah_sekarang,''),', ',COALESCE(B.DESA_PENGAJU,''),', ',COALESCE(B.KEC_PENGAJU,''))
 													, 2))) AS ALAMAT_PENGAJU
 							
-							,COALESCE(B.hp,'') AS HP_PENGAJU
+							,COALESCE(A.no_hp,B.hp) AS HP_PENGAJU
 							,COALESCE(B.JENIS_PENGAJU,'') AS JENIS_PENGAJU
 							,COALESCE(B.isLembaga,'') AS PENGAJU_ISLEMBAGA
 							
@@ -484,5 +484,19 @@
 				return false;
 			}
 		}
+		
+		function cek_pengajuan($cari)
+        {
+			$query = "SELECT * FROM tb_pengajuan ".$cari."";
+			$query = $this->db->query($query);
+            if($query->num_rows() > 0)
+            {
+                return $query;
+            }
+            else
+            {
+                return false;
+            }
+        }
 	}
 ?>

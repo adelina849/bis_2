@@ -484,5 +484,19 @@
 				return false;
 			}
 		}
+		
+		function cek_pengajuan($cari)
+        {
+			$query = "SELECT * FROM tb_pengajuan ".$cari."";
+			$query = $this->db->query($query);
+            if($query->num_rows() > 0)
+            {
+                return $query;
+            }
+            else
+            {
+                return false;
+            }
+        }
 	}
 ?>

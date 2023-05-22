@@ -1583,6 +1583,10 @@ $route['gl-admin-images-hapus/(:any)/(:any)/(:any)'] = 'C_gl_admin_images/hapus'
 	$route['gl-admin-pengajuan'] = "C_gl_admin_pengajuan/index";
 	$route['gl-admin-pengajuan/(:any)'] = 'C_gl_admin_pengajuan/index';
 	
+	$route['gl-admin-pengajuan-tambah-mustahik'] = "C_gl_admin_pengajuan/tambah_mustahik";
+	$route['gl-admin-pengajuan-tambah-mustahik/(:any)'] = 'C_gl_admin_pengajuan/tambah_mustahik';
+	$route['gl-admin-pengajuan-tambah-mustahik/(:any)/(:any)'] = 'C_gl_admin_pengajuan/tambah_mustahik';
+	
 	$route['gl-admin-pengajuan-simpan'] = "C_gl_admin_pengajuan/simpan";
 	$route['gl-admin-pengajuan-simpan/(:any)'] = 'C_gl_admin_pengajuan/simpan';
 	

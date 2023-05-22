@@ -15,8 +15,6 @@ class M_gl_pengaturan extends CI_Model
         parent::__construct();
     }
 	
-	
-	
 	function view_query_general($query)
 	{
 		$query = $this->db->query($query);
@@ -28,13 +26,6 @@ class M_gl_pengaturan extends CI_Model
 		{
 			return false;
 		}
-	}
-	
-	function exec_query_general($query)
-	{
-		/*SIMPAN DAN CATAT QUERY*/
-			$this->M_gl_log->simpan_query($query);
-		/*SIMPAN DAN CATAT QUERY*/
 	}
 	
 	function hapus_log_kadaluarsa($kode_kantor)

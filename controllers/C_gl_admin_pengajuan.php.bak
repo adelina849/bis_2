@@ -137,6 +137,115 @@ class C_gl_admin_pengajuan extends CI_Controller {
 		}
 	}
 	
+	public function tambah_mustahik()
+	{
+		if(($this->session->userdata('ses_user_admin') == null) or ($this->session->userdata('ses_pass_admin') == null))
+		{
+			header('Location: '.base_url().'gl-admin-login');
+		}
+		else
+		{
+			$cek_ses_login = $this->M_gl_karyawan->get_karyawan_jabatan_row(" WHERE A.user = '".$this->session->userdata('ses_user_admin')."' AND A.pass = '".base64_encode(md5($this->session->userdata('ses_pass_admin_pure')))."'  AND A.kode_kantor = '".$this->session->userdata('ses_kode_kantor')."' ");
+			
+			if(!empty($cek_ses_login))
+			{
+				$get_md5_id_pengajuan = ($this->uri->segment(2,0));
+				$cari_pengajuan = 
+				"
+					WHERE kode_kantor = '".$this->session->userdata('ses_kode_kantor')."' AND MD5(id_pengajuan) = '".$get_md5_id_pengajuan."';
+				";
+				$hasil_cek_pengajuan = $this->M_gl_pengajuan->cek_pengajuan($cari_pengajuan);
+				if(!empty($hasil_cek_pengajuan))
+				{
+					$hasil_cek_pengajuan = $hasil_cek_pengajuan->row();
+					
+					if((!empty($_GET['cari'])) && ($_GET['cari']!= "")  )
+					{
+						$cari = $_GET['cari'];
+					}
+					else
+					{
+						$cari = "";
+					}
+					
+					$query_list_costumer_pengajuan = 
+					"
+						SELECT
+							A.*
+							,COALESCE(B.id_costumer,'') AS CEK_COSTUMER
+							,COALESCE(C.nama_kat_costumer,'') AS nama_kat_costumer
+						FROM tb_costumer AS A
+						LEFT JOIN tb_pengajuan_tambah_mustahik AS B ON A.kode_kantor AND B.kode_kantor AND A.id_costumer = B.id_costumer AND MD5(B.id_pengajuan) = '".$get_md5_id_pengajuan."'
+						LEFT JOIN tb_kat_costumer AS C ON A.kode_kantor = C.kode_kantor AND A.id_kat_costumer = C.id_kat_costumer
+						WHERE (A.nik LIKE '%".$cari."%' OR A.nama_lengkap LIKE '%".$cari."%')
+						ORDER BY B.tgl_ins DESC,A.nama_lengkap ASC
+						LIMIT 0,1000
+					";
+					$list_costumer = $this->M_gl_pengaturan->view_query_general($query_list_costumer_pengajuan);
+					
+					
+					
+					
+					$msgbox_title = " Data Mustahik Tambahan";
+					$kode_kantor = $this->session->userdata('ses_kode_kantor');
+					
+					$data = array('page_content'=>'gl_admin_pengajuan_tambah_mustahik','msgbox_title' => $msgbox_title,'list_costumer' => $list_costumer,'kode_kantor' => $kode_kantor,'hasil_cek_pengajuan' => $hasil_cek_pengajuan);
+					$this->load->view('admin/container',$data);
+				}
+				else
+				{
+					header('Location: '.base_url().'gl-admin-pengajuan');
+				}
+			}
+			else
+			{
+				header('Location: '.base_url().'gl-admin-login');
+			}
+		}
+	}
+	
+	function simpan_tambah_mustahik()
+	{
+		$id_costumer = $_POST['id_costumer'];
+		$id_pengajuan = $_POST['id_pengajuan'];
+		
+		$query_cek = "SELECT * FROM tb_pengajuan_tambah_mustahik WHERE id_pengajuan = '".$id_pengajuan."' AND id_costumer = '".$id_costumer."'; ";
+		$hasil_cek = $this->M_gl_pengaturan->view_query_general($query_cek);
+		
+		if(!empty($hasil_cek))
+		{
+			$hasil_cek = $hasil_cek->row();
+			$query_hapus = "DELETE FROM tb_pengajuan_tambah_mustahik WHERE id_pengajuan = '".$id_pengajuan."' AND id_costumer = '".$id_costumer."'; ";
+			
+			$this->M_gl_pengaturan->exec_query_general($query_hapus);
+			echo'BERHASIL';
+		}
+		else
+		{
+			$query_simpan = "
+								INSERT INTO tb_pengajuan_tambah_mustahik
+								(
+									id_pengajuan,
+									id_costumer,
+									tgl_ins,
+									user_ins,
+									kode_kantor
+								)
+								value
+								(
+									'".$id_pengajuan."',
+									'".$id_costumer."',
+									NOW(),
+									'',
+									''
+								);";
+			
+			$this->M_gl_pengaturan->exec_query_general($query_simpan);
+			echo'BERHASIL';
+			//return false;
+		}
+	}
+	
 	function ajax_getKode()
 	{
 		$get_no_kode = $this->M_gl_pengajuan->get_no_kode_per_jenis($this->session->userdata('ses_kode_kantor'),$_POST['jenis']);
@@ -464,7 +573,7 @@ class C_gl_admin_pengajuan extends CI_Controller {
 						$_POST['isLembaga'],
 						$this->session->userdata('ses_id_karyawan'),
 						$this->session->userdata('ses_kode_kantor'),
-						$_POST['no_hp']
+						$_POST['no_tlp_pengaju'] //no_hp
 					);
 					
 					
@@ -499,7 +608,7 @@ class C_gl_admin_pengajuan extends CI_Controller {
 						$_POST['isLembaga'],
 						$this->session->userdata('ses_id_karyawan'),
 						$this->session->userdata('ses_kode_kantor'),
-						$_POST['no_hp']
+						$_POST['no_tlp_pengaju'] //no_hp
 					
 					);
 					
