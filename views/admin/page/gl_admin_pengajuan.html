@@ -175,7 +175,8 @@
 							
 							<div class="form-group">
 								<label for="isLembaga">Apakah Lembaga ? (Jika Ya, Berarti bantuan untuk lembaga)</label>
-								<select name="isLembaga" id="isLembaga" class="form-control select2" title="BANK" onchange="getKode(this)">
+								<select name="isLembaga" id="isLembaga" class="required form-control select2" title="<b>PILIH JENIS PENGAJUAN WAJIB DI ISI !</b>" onchange="getKode(this)">
+									<option value="">.::PILIH JENIS PENGAJUAN::.</option>
 									<option value="YA">YA (LEMBAGA)</option>
 									<option value="TIDAK">TIDAK (PERORANGAN)</option>
 								</select>

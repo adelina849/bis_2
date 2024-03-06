@@ -674,6 +674,16 @@ class C_gl_admin_uang_masuk extends CI_Controller {
 		header('Location: '.base_url().'gl-admin-pemasukan');
 	}
 	
+	function update_nominal()
+	{
+		$nominal = str_replace(",","",$_POST['nominal']); //$_POST['nominal'],
+		$query = "UPDATE tb_uang_masuk SET nominal = '".$nominal."' WHERE kode_kantor = '".$this->session->userdata('ses_kode_kantor')."' AND id_uang_masuk = '".$_POST['id_uang_masuk']."';";
+		
+		$this->M_gl_uang_masuk->exec_query($query);
+		echo'BERHASIL';
+		
+	}
+	
 	function cek_uang_masuk()
 	{
 		$hasil_cek = $this->M_gl_uang_masuk->get_uang_masuk('no_bukti',$_POST['no_bukti']);

@@ -33,7 +33,7 @@
 							CAST(LEFT(NOW(),4) AS CHAR) AS Y,
 							CAST(MID(NOW(),6,2) AS CHAR) AS M,
 							MID(NOW(),9,2) AS D,
-							COALESCE(MAX(CAST(LEFT(no_bukti,5) AS UNSIGNED)) + 1,1) AS ORD
+							COALESCE(MAX(CAST(LEFT(no_bukti,6) AS UNSIGNED)) + 1,1) AS ORD
 							From tb_uang_masuk
 							-- WHERE LEFT(DATE(tgl_ins),7) = LEFT(DATE(NOW()),7)
 							WHERE DATE(tgl_ins) = DATE(NOW())
@@ -209,7 +209,7 @@
 								CAST(LEFT(NOW(),4) AS CHAR) AS Y,
 								CAST(MID(NOW(),6,2) AS CHAR) AS M,
 								MID(NOW(),9,2) AS D,
-								COALESCE(MAX(CAST(RIGHT(id_uang_masuk,5) AS UNSIGNED)) + 1,1) AS ORD
+								COALESCE(MAX(CAST(RIGHT(id_uang_masuk,6) AS UNSIGNED)) + 1,1) AS ORD
 								From tb_uang_masuk
 								WHERE DATE(tgl_ins) = DATE(NOW())
 								AND kode_kantor = '".$kode_kantor."'

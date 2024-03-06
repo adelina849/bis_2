@@ -487,7 +487,14 @@
 													<br/><b>TANGGAL : </b>'.$row->tgl_uang_masuk.'	
 												</td>';
 												echo'<td>'.$row->ket_uang_masuk.'</td>';
-												echo '<td style="text-align:right;">'.number_format($row->nominal,0,'.',',').'</td>';
+												
+												//'.number_format($row->nominal,0,'.',',').'
+												echo '<td style="text-align:right;">
+													<input type="text" id="nominal_'.$no.'" name="nominal_'.$no.'"  maxlength="25" onkeypress="return isNumberKey(event)" onfocusout="getRupiah(this.id)" class="required form-control" onchange="simpan_nominal_baru('.$no.')" size="35" alt="Nominal/Besar Uang Yang Didapat/masuk" title="Nominal/Besar Uang Yang Didapat/masuk" placeholder="*Nominal/Besar Uang Yang Didapat/masuk" value="'.number_format($row->nominal,0,'.',',').'"/>
+												</td>';
+												//echo'<input type="hidden" id="nominal_'.$no.'" name="nominal_'.$no.'" value="'.$row->nominal.'" />';
+												
+												echo'<input type="hidden" id="stat_edit_'.$no.'" name="stat_edit_'.$no.'" value="'.$row->id_uang_masuk.'" />';
 												
 												echo'<input type="hidden" id="id_uang_masuk_'.$no.'" name="id_uang_masuk_'.$no.'" value="'.$row->id_uang_masuk.'" />';
 												
@@ -512,7 +519,7 @@
 												echo'<input type="hidden" id="terima_dari_'.$no.'" name="terima_dari_'.$no.'" value="'.$row->terima_dari.'" />';
 												echo'<input type="hidden" id="diterima_oleh_'.$no.'" name="diterima_oleh_'.$no.'" value="'.$row->diterima_oleh.'" />';
 												echo'<input type="hidden" id="untuk_'.$no.'" name="untuk_'.$no.'" value="'.$row->untuk.'" />';
-												echo'<input type="hidden" id="nominal_'.$no.'" name="nominal_'.$no.'" value="'.$row->nominal.'" />';
+												
 												echo'<input type="hidden" id="ket_uang_masuk_'.$no.'" name="ket_uang_masuk_'.$no.'" value="'.$row->ket_uang_masuk.'" />';
 												echo'<input type="hidden" id="tgl_uang_masuk_'.$no.'" name="tgl_uang_masuk_'.$no.'" value="'.$row->tgl_uang_masuk.'" />';
 												echo'<input type="hidden" id="isTabungan_'.$no.'" name="isTabungan_'.$no.'" value="'.$row->isTabungan.'" />';
@@ -684,6 +691,39 @@
 			
 		
 <script type='text/javascript'>
+	function simpan_nominal_baru(id)
+	{
+		var id_uang_masuk = $('#stat_edit_'+id).val();
+		var nominal = $('#nominal_'+id).val();
+		nominal = nominal.replace(',','');
+		nominal = nominal.replace(',','');
+		nominal = nominal.replace(',','');
+		nominal = nominal.replace(',','');
+		
+		$.ajax({type: "POST", url: "<?php echo base_url();?>C_gl_admin_uang_masuk/update_nominal/"
+		, data: 
+			{
+				id_uang_masuk:id_uang_masuk
+				,nominal:nominal
+				
+			}
+		, success:function(data)
+		{
+			if(data!=0)
+			{
+				alert("DATA BERHASIL DISIMPAN !");
+			} 
+			else
+			{
+				//$("#table_transaksi").html("Tidak Ada Data Yang Ditampilkan");
+				alert("DATA GAGAL DISIMPAN !");
+			}
+		}
+		});
+	}
+	
+	
+	
 	function simpan_ajax()
 	{
 		var r = confirm("Apakah Anda Yakin Akan Menyelesaikan Transaksi ?");

@@ -175,7 +175,8 @@
 							
 							<div class="form-group">
 								<label for="isLembaga">Apakah Lembaga ? (Jika Ya, Berarti bantuan untuk lembaga)</label>
-								<select name="isLembaga" id="isLembaga" class="form-control select2" title="BANK" onchange="getKode(this)">
+								<select name="isLembaga" id="isLembaga" class="required form-control select2" title="<b style="text-shadow: 2px 2px #ff0000;">PILIH JENIS PENGAJUAN WAJIB DI ISI !</b>" onchange="getKode(this)">
+									<option value="">.::PILIH JENIS PENGAJUAN::.</option>
 									<option value="YA">YA (LEMBAGA)</option>
 									<option value="TIDAK">TIDAK (PERORANGAN)</option>
 								</select>
@@ -506,7 +507,7 @@
 
 												
 												echo'<td>
-	<a class="confirm-btn" href="#" title = "Input Tambahan data mustahik jika lebih dari 1 '.$row->no_reg.'" alt = "Input Tambahan data mustahik jika lebih dari 1 '.$row->no_reg.'">
+	<a class="confirm-btn" href="'.base_url().'gl-admin-pengajuan-tambah-mustahik/'.md5($row->id_pengajuan).'" title = "Input Tambahan data mustahik jika lebih dari 1 '.$row->no_reg.'" alt = "Input Tambahan data mustahik jika lebih dari 1 '.$row->no_reg.'">
 		<i class="fa fa-users"></i> TAMBAH MUSTAHIK
 	</a>
 	<br/>

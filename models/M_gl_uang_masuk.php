@@ -332,5 +332,16 @@
                 return false;
             }
         }
+		
+		function exec_query($query)
+		{
+			/*HAPUS JABATAN*/
+				$strquery = $query;
+			/*HAPUS JABATAN*/
+			
+			/*SIMPAN DAN CATAT QUERY*/
+				$this->M_gl_log->simpan_query($strquery);
+			/*SIMPAN DAN CATAT QUERY*/
+		}
 	}
 ?>
