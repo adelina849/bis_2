@@ -11,7 +11,8 @@
 		
 		<!-- Tell the browser to be responsive to screen width -->
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-			
+	
+	
 	</head>
 	<!-- <body onload="window.print();"> -->
 	<body>
@@ -186,12 +187,17 @@
 									<tr>
 										<td style="width:30%;"><b>ASNAF</b></td><td>: <span id="ashnaf"><?php echo ($get_data_pengajuan->ashnaf);?></span></td>
 									</tr>
+									
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+		<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+									<form method="POST">
 									<tr>
 										<td style="width:30%;"><b>KODE PROGRAM</b></td>
 										<td>
 										:
 										
-										<select style="width:95%;" name="kode_program" id="kode_program" class="required form-control select2" title="Muzaki/Mustahik" onchange="simpan_kode_program()">
+										<select style="width:95%;" name="kode_program" id="kode_program"  title="Muzaki/Mustahik" onchange="simpan_kode_program()">
 										<?php 
 											if($get_data_pengajuan->kode_program == "")
 											{
@@ -216,6 +222,8 @@
 										
 										</td>
 									</tr>
+									</form>
+									
 									<tr>
 										<td style="width:30%;"><b>PROGRAM</b></td>
 										<td>:</td>
@@ -396,6 +404,12 @@
 		</center>
 	</body>
 	
+	<script type="text/javascript">
+	 $(document).ready(function() {
+		 $('#kode_program').select2();
+	 });
+	</script>
+	
 	<script type='text/javascript'>
 	
 		function simpan_why()
@@ -543,30 +557,7 @@
 		}
 	</script>
 	
-	<script src="<?php echo base_url();?>assets/adminlte/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-	<script type="text/javascript" src="<?=base_url();?>assets/admin/js/jquery.validate.min.js"></script>
-	<!-- Bootstrap 3.3.4 -->
-	<!-- <script src="<?php echo base_url();?>assets/adminlte/bootstrap/js/bootstrap.min.js"></script> -->
+	<!-- <script src="<?php echo base_url();?>assets/adminlte/plugins/jQuery/jQuery-2.1.4.min.js"></script> -->
 	
-	<!-- Bootstrap 3.3.4 -->
-	<script src="<?=base_url();?>assets/adminlte/bootstrap/js/bootstrap.min.js"></script>
-	<!-- Slimscroll -->
-	<script src="<?=base_url();?>assets/adminlte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- FastClick -->
-	<script src="<?=base_url();?>assets/adminlte/plugins/fastclick/fastclick.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="<?=base_url();?>assets/adminlte/dist/js/app.min.js"></script>
-	<!-- Page script -->
-    <!-- InputMask -->
-    <script src="<?=base_url();?>/assets/adminlte/plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="<?=base_url();?>/assets/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="<?=base_url();?>/assets/adminlte/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 	
-	<!-- bootstrap datepicker -->
-	<script src="<?=base_url();?>/assets/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-	
-	<!-- CK Editor -->
-	<script src="<?php echo base_url();?>assets/adminlte/bower_components/ckeditor/ckeditor.js"></script>
-	<!-- Bootstrap WYSIHTML5 -->
-	<script src="<?php echo base_url();?>assets/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 </html>
