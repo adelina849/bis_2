@@ -422,7 +422,6 @@
 									<option value="IRT">IRT</option>
 									<option value="PELAJAR">PELAJAR</option>
 									<option value="BURUH">BURUH</option>
-									<option value="SERABUTAN">SERABUTAN</option>
 									<option value="LAINYA">LAINYA</option>
                                </select>
                             </div>
