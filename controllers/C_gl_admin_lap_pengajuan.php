@@ -254,6 +254,112 @@ class C_gl_admin_lap_pengajuan extends CI_Controller {
 			}
 		}
 	}
+
+	public function laporan_surat()
+	{
+		if(($this->session->userdata('ses_user_admin') == null) or ($this->session->userdata('ses_pass_admin') == null))
+		{
+			header('Location: '.base_url().'gl-admin-login');
+		}
+		else
+		{
+			$cek_ses_login = $this->M_gl_karyawan->get_karyawan_jabatan_row(" WHERE A.user = '".$this->session->userdata('ses_user_admin')."' AND A.pass = '".base64_encode(md5($this->session->userdata('ses_pass_admin_pure')))."'  AND A.kode_kantor = '".$this->session->userdata('ses_kode_kantor')."' ");
+			
+			if(!empty($cek_ses_login))
+			{
+				if((!empty($_GET['in_out'])) && ($_GET['in_out']!= "")  )
+				{
+					if($_GET['in_out'] == 'MASUK')
+					{
+						$in_out = 'IN';
+					}
+					else
+					{
+						$in_out = 'OUT';
+					}
+				}
+				else
+				{
+					$in_out = 'IN';
+				}					
+				
+				
+				if((!empty($_GET['dari'])) && ($_GET['dari']!= "")  )
+				{
+					$dari = $_GET['dari'];
+					$sampai = $_GET['sampai'];
+				}
+				else
+				{
+					$dari = date("Y-m-d");
+					$sampai = date("Y-m-d");
+				}
+				
+				if((!empty($_GET['cari'])) && ($_GET['cari']!= "")  )
+				{
+					$cari = $_GET['cari'];
+				}
+				else
+				{
+					$cari = '';
+				}					
+				
+				$query = "
+							SELECT 
+								tgl_masuk AS tgl_diterima 
+								,tgl_acara AS tgl_surat
+								,no_surat
+								,tempat_acara
+								,perihal
+								,dari
+								,ket_surat
+							FROM tb_surat 
+							WHERE 
+								in_out = '".$in_out."'
+								AND DATE(tgl_ins) BETWEEN '".$dari."' AND '".$sampai."'
+								AND 
+								(
+									no_surat LIKE '%".$cari."%'
+									OR tempat_acara LIKE '%".$cari."%'
+									OR perihal LIKE '%".$cari."%'
+									OR dari LIKE '%".$cari."%'
+								)
+							GROUP BY 
+								tgl_masuk
+								,tgl_acara
+								,no_surat
+								,tempat_acara
+								,perihal
+								,dari
+								,ket_surat
+							ORDER BY tgl_ins DESC
+							;
+				";
+				
+				$list_surat = $this->M_gl_pengaturan->view_query_general($query);
+				
+				if($in_out == 'MASUK')
+				{
+					$laporan_title = " Laporan Pengelolaan Surat Masuk";
+				}
+				else
+				{
+					$laporan_title = " Laporan Pengelolaan Surat Keluar";
+				}	
+				
+				$msgbox_title = " Laporan pengelolaan surat masuk dan keluar";
+				
+				
+				$data = array('page_content'=>'gl_admin_lap_surat','list_surat'=>$list_surat,'laporan_title'=>$laporan_title,'msgbox_title' => $msgbox_title,'in_out' => $in_out);
+				$this->load->view('admin/container',$data);
+			}
+			else
+			{
+				header('Location: '.base_url().'gl-admin-login');
+			}
+		}
+	}
+	
 }
 
 /* End of file welcome.php */

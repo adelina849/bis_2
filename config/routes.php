@@ -1621,6 +1621,9 @@ $route['gl-admin-images-hapus/(:any)/(:any)/(:any)'] = 'C_gl_admin_images/hapus'
 	$route['gl-admin-view-lap-detail-excel'] = "C_gl_admin_lap_pengajuan/export_excel_detail";
 	$route['gl-admin-view-lap-detail-excel/(:any)'] = 'C_gl_admin_lap_pengajuan/export_excel_detail';
 	
+	$route['gl-admin-view-lap-pengelolaan-surat'] = "C_gl_admin_lap_pengajuan/laporan_surat";
+	$route['gl-admin-view-lap-pengelolaan-surat/(:any)'] = 'C_gl_admin_lap_pengajuan/laporan_surat';
+	
 //BAZNAS
 
 

@@ -430,7 +430,7 @@
 						if( ($this->session->userdata('ses_akses_lvl2_52') > 0) or ($this->session->userdata('ses_nama_jabatan') == 'Admin Aplikasi') )
 						{
 						?>
-							<li id="510_transaksi_ajuan"><a href="<?=base_url()?>gl-admin-pengajuan"><i class="fa fa-file-word-o"></i> Cek Pasien</a></li>
+							<li id="510_transaksi_cek_pasien"><a href="<?=base_url()?>gl-admin-cek-pasien"><i class="fa fa-file-word-o"></i> Cek Pasien</a></li>
 						
 							<li id="510_transaksi_ajuan"><a href="<?=base_url()?>gl-admin-pengajuan"><i class="fa fa-file-word-o"></i> Registrasi Proposal</a></li>
 						<?php
@@ -517,6 +517,8 @@
 							<li id="61_laporan_ajuan"><a href="<?=base_url()?>gl-admin-view-lap-ajuan"><i class="fa fa-files-o"></i> Pelayanan Ajuan	</a></li>
 							
 							<li id="62_laporan_detail"><a href="<?=base_url()?>gl-admin-view-lap-detail"><i class="fa fa-files-o"></i> Laporan Detail	</a></li>
+							
+							<li id="62_laporan_detail"><a href="<?=base_url()?>gl-admin-view-lap-pengelolaan-surat"><i class="fa fa-files-o"></i> Laporan Surat	</a></li>
 							
 						<?php
 						}

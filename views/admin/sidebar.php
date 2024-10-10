@@ -518,6 +518,8 @@
 							
 							<li id="62_laporan_detail"><a href="<?=base_url()?>gl-admin-view-lap-detail"><i class="fa fa-files-o"></i> Laporan Detail	</a></li>
 							
+							<li id="63_laporan_pengloaan_surat"><a href="<?=base_url()?>gl-admin-view-lap-pengelolaan-surat"><i class="fa fa-files-o"></i> Laporan Surat	</a></li>
+							
 						<?php
 						}
 						?>
